@@ -6,4 +6,5 @@ class AxiomusApi::OrderRequest < AxiomusApi::Request
       auth.checksum = order.checksum(uid)
     end
   end
+
 end
