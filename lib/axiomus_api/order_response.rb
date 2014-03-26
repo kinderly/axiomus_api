@@ -18,11 +18,11 @@ class AxiomusApi::OrderResponse
     @price = doc.xpath('response/status/@price').text
   end
 
-  def error_text
+  def error_message
     @description unless success?
   end
 
   def success?
-    @code == AxiomusApi::ErrorCodes::Success
+    @code == AxiomusApi::ResponseCodes::SUCCESS
   end
 end

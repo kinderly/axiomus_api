@@ -20,11 +20,7 @@ module AxiomusApi::Actions
     status: AxiomusApi::StatusRequest
   }
 
-  def self.create_request(mode)
-    if[!ACTIONS.keys.includes?(mode)]
-      raise ('Unknown action')
-    end
-
+  def create_request(mode)
     ACTIONS[mode].new.tap{|req| req.mode = mode}
   end
 end

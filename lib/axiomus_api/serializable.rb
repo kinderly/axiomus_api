@@ -36,10 +36,6 @@ module AxiomusApi::Serializable
     end
   end
 
-  def from_xml
-
-  end
-
   private
 
   def obj_to_xml(xml, obj, xml_name = nil)

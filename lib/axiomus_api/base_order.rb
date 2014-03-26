@@ -16,14 +16,14 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_field :okey, optional: true, xml_type: :attribute
 
   def initialize
-    items = []
+    @items = []
   end
 
   def total_quantity
-    items.inject(0){|sum, it| sum + it.quantity}
+    @items.inject(0){|sum, it| sum + it.quantity}
   end
 
   def checksum(uid)
-    Digest::MD5.hexdigest("#{uid}u#{items.count}#{total_quantity}")
+    Digest::MD5.hexdigest("#{uid}u#{@items.count}#{total_quantity}")
   end
 end

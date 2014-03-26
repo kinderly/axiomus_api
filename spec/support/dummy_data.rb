@@ -27,5 +27,13 @@ module DummyData
   </response>
   XML
 
+  REGIONS_SUCCESS_RESPONSE = <<-XML
+  <?xml version='1.0' standalone='yes'?>
+  <response>
+    <region region_code='21' name='Волшебная страна'>
+    </region>
+  </response>
+  XML
+
 
 end
