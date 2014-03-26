@@ -1,3 +1,4 @@
 .bundle
 *.sublime*
 /vendor/bundle
+/coverage

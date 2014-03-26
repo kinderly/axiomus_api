@@ -1,0 +1,3 @@
+module AxiomusApi::Validated
+
+end

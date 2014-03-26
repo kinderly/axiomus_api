@@ -1,0 +1,3 @@
+module AxiomusApi::Serializable
+
+end
