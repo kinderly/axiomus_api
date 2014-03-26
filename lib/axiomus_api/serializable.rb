@@ -1,4 +1,4 @@
-require('nokogiri')
+require 'nokogiri'
 
 module AxiomusApi::Serializable
   def to_xml(xml_header = false, tag_name = nil)
