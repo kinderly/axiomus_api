@@ -1,6 +1,6 @@
 class AxiomusApi::SelfExportOrder < AxiomusApi::BaseOrder
-  attr_accessor :car
-  attr_accessor :d_date
-  attr_accessor :b_time
-  attr_accessor :e_time
+  xml_field :car, xml_type: :attribute
+  xml_field :d_date, xml_type: :attribute
+  xml_field :b_time, xml_type: :attribute
+  xml_field :e_time, xml_type: :attribute
 end

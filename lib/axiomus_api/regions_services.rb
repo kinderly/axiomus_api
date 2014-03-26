@@ -1,6 +1,6 @@
-class AxiomusApi::RegionsSerivces
-  attr_accessor :cheque
-  attr_accessor :not_open
-  attr_accessor :extrapack
-  attr_accessor :big
+class AxiomusApi::RegionsSerivces < AxiomusApi::Base
+  xml_field :cheque, xml_type: :attribute, optional: true
+  xml_field :not_open, xml_type: :attribute, optional: true
+  xml_field :extrapack, xml_type: :attribute, optional: true
+  xml_field :big, xml_type: :attribute, optional: true
 end

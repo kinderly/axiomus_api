@@ -1,10 +1,8 @@
-class AxiomusApi::Services
-  attr_accessor :cash
-  attr_accessor :cheque
-  attr_accessor :card
-  attr_accessor :big
-
-  @optional_attributes = [:cash, :cheque, :card, :big]
+class AxiomusApi::Services < AxiomusApi::Base
+  xml_field :cash, xml_type: :attribute, optional: true
+  xml_field :cheque, xml_type: :attribute, optional: true
+  xml_field :card, xml_type: :attribute, optional: true
+  xml_field :big, xml_type: :attribute, optional: true
 
   def valid?
     (@cash ^ @cheque ^ @card) || (@cheque && @card)

@@ -1,28 +1,28 @@
-class AxiomusApi::StatusResponse
-  class Order
-    attr_reader :id
-    attr_reader :inner_id
-    attr_reader :price
+class AxiomusApi::StatusResponse < AxiomusApi::Base
+  class Order < AxiomusApi::Base
+    xml_field :id, xml_type: :attribute
+    xml_field :inner_id, xml_type: :attribute
+    xml_field :price, xml_type: :attribute
   end
 
-  class Status
-    attr_reader :code
-    attr_reader :description
+  class Status < AxiomusApi::Base
+    xml_field :code, xml_type: :attribute
+    xml_field :description, xml_type: :text
   end
 
-  class PostStatus
-    attr_reader :tracking
-    attr_reader :postprice
+  class PostStatus < AxiomusApi::Base
+    xml_field :tracking, xml_type: :attribute
+    xml_field :postprice, xml_type: :attribute
   end
 
-  class Pack
-    attr_reader :number
-    attr_reader :places
-    attr_reader :status
+  class Pack < AxiomusApi::Base
+    xml_field :number, xml_type: :attribute
+    xml_field :places, xml_type: :attribute
+    xml_field :status, xml_type: :attribute
   end
 
-  attr_reader :date
-  attr_reader :refused_items
-  attr_reader :post_status
-  attr_reader :packs
+  xml_field :d_date
+  xml_field :refused_items
+  xml_field :poststatus
+  xml_field :packs
 end

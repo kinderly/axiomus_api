@@ -1,6 +1,6 @@
-class AxiomusApi::Address
-  attr_accessor :index
-  attr_accessor :region
-  attr_accessor :area
-  attr_accessor :p_address
+class AxiomusApi::Address < AxiomusApi::Base
+  xml_field :index
+  xml_field :region
+  xml_field :area
+  xml_field :p_address
 end

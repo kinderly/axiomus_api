@@ -1,8 +1,6 @@
 class AxiomusApi::PickupOrder < AxiomusApi::BaseOrder
-  attr_accessor :office
-  attr_accessor :b_date
-  attr_accessor :e_date
-  attr_accessor :incl_delivery_sum
-
-  @optional_attributes = [:incl_delivery_sum]
+  xml_field :office, xml_type: :attribute, optional: true
+  xml_field :b_date, xml_type: :attribute
+  xml_field :e_date, xml_type: :attribute
+  xml_field :incl_delivery_sum, xml_type: :attribute, optional: true
 end

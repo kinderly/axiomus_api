@@ -1,6 +1,4 @@
-class AxiomusApi::ExportServices
-  attr_accessor :transit
-  attr_accessor :warrant
-
-  optional_attributes = [:transit, :warrant]
+class AxiomusApi::ExportServices < AxiomusApi::Base
+  xml_field :transit, xml_type: :attribute, optional: true
+  xml_field :warrant, xml_type: :attribute, optional: true
 end

@@ -1,6 +1,8 @@
-class AxiomusApi::Item
-  attr_accessor :name
-  attr_accessor :weight
-  attr_accessor :quantity
-  attr_accessor :price
+class AxiomusApi::Item < AxiomusApi::Base
+  xml_element :item
+
+  xml_field :name, xml_type: :attribute
+  xml_field :weight, xml_type: :attribute
+  xml_field :quantity, xml_type: :attribute
+  xml_field :price, xml_type: :attribute
 end

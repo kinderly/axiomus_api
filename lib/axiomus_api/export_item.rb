@@ -1,3 +1,3 @@
 class AxiomusApi::ExportItem < AxiomusApi::Item
-  attr_accessor :oid
+  xml_field :oid, xml_type: :attribute
 end

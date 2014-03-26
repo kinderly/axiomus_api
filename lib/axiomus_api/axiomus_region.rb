@@ -1,17 +1,17 @@
-class AxiomusApi::AxiomusRegion
-  class City
-    attr_reader :code
-    attr_reader :name
+class AxiomusApi::AxiomusRegion < AxiomusApi::Base
+  class City < AxiomusApi::Base
+    xml_field :code, xml_type: :attribute, xml_name: :city_code
+    xml_field :name, xml_type: :text
   end
 
-  class Office
-    attr_reader :code
-    attr_reader :city_code
-    attr_reader :name
+  class Office < AxiomusApi::Base
+    xml_field :code, xml_type: :attribute, xml_name: :office_code
+    xml_field :city_code, xml_type: :attribute
+    xml_field :name, xml_type: :text
   end
 
-  attr_reader :code
-  attr_reader :name
-  attr_reader :courier
-  attr_reader :pickup
+  xml_field :code, xml_type: :attribute, xml_name: :region_code
+  xml_field :name, xml_type: :attribute
+  xml_field :courier
+  xml_field :pickup
 end

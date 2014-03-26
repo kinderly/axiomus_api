@@ -7,9 +7,11 @@ module AxiomusApi
 end
 
 
+require_relative('axiomus_api/serializable')
+require_relative('axiomus_api/base')
 require_relative('axiomus_api/base_order.rb')
+require_relative('axiomus_api/request.rb')
 Dir.glob(File.join(File.dirname(__FILE__),'axiomus_api/*.rb')).each do |file|
-  puts(file)
   require_relative(file)
 end
 

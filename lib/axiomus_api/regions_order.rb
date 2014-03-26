@@ -1,9 +1,7 @@
 class AxiomusApi::RegionsOrder < AxiomusApi::BaseOrder
-  attr_accessor :d_date
-  attr_accessor :b_time
-  attr_accessor :e_time
-  attr_accessor :incl_deliv_sum
-  attr_accessor :address
-
-  @optional_attributes = [:incl_deliv_sum]
+  xml_field :d_date, xml_type: :attribute
+  xml_field :b_time, xml_type: :attribute
+  xml_field :e_time, xml_type: :attribute
+  xml_field :incl_deliv_sum, xml_type: :attribute, optional: true
+  xml_field :address, optional: true
 end
