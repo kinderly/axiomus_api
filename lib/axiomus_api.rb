@@ -1,5 +1,4 @@
 module AxiomusApi
-  VERSION = '0.1'
   AXIOMUS_PROD_PATH = '/hydra/api_xml.php'
   AXIOMUS_TEST_PATH = '/test/api_xml_test.php'
   AXIOMUS_HOST = 'axiomus.ru'
