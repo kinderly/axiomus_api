@@ -68,5 +68,4 @@ module DummyData
   </response>
   XML
 
-
 end

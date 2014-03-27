@@ -1,4 +1,4 @@
-require_relative('./lib/axiomus_api.rb')
+require_relative('./lib/version.rb')
 
 Gem::Specification.new do |s|
   s.name = "axiomus_api"
