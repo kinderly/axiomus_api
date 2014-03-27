@@ -64,8 +64,31 @@ module DummyData
   <?xml version='1.0' standalone='yes'?>
   <response>
     <region region_code='21' name='Волшебная страна'>
+      <courier>
+        <city city_code='21'>King's Landing</city>
+      </courier>
+      <pickup>
+        <office office_code='44' city_code='21'>Office 2</office>
+      </pickup>
     </region>
   </response>
+  XML
+
+  STATUS_SUCCESS_RESPONSE = <<-XML
+    <?xml version="1.0" encoding="utf-8"?>
+    <response>
+      <request>status</request>
+      <order id="1013" inner_id="16777" price="156.83" />
+      <status code="211">расчет за доставку</status>
+      <refused_items>
+        <item name="mbon" quantity="2" price="34.4"/>
+      </refused_items>
+      <packs>
+        <pack number="32" places="1" status="1"/>
+      </packs>
+      <d_date>2011-03-17</d_date>
+      <poststatus tracking="32167" postprice="34.3"/>
+    </response>
   XML
 
 end

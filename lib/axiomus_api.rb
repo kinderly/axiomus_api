@@ -13,6 +13,7 @@ require_relative('axiomus_api/request.rb')
 require_relative('axiomus_api/order_request.rb')
 require_relative('axiomus_api/status_request.rb')
 require_relative('axiomus_api/actions.rb')
+require_relative('axiomus_api/item.rb')
 Dir.glob(File.join(File.dirname(__FILE__),'axiomus_api/*.rb')).each do |file|
   require_relative(file)
 end
