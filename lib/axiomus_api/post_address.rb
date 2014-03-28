@@ -1,3 +1,5 @@
+require_relative 'base'
+
 class AxiomusApi::PostAddress < AxiomusApi::Base
   xml_field :index
   xml_field :region

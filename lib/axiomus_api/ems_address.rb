@@ -1,3 +1,5 @@
+require_relative 'base'
+
 class AxiomusApi::EmsAddress < AxiomusApi::Base
   xml_field :index, xml_type: :attribute
   xml_field :area, xml_type: :attribute

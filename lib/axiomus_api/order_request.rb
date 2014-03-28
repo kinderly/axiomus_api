@@ -1,3 +1,6 @@
+require_relative 'request'
+require_relative 'base_auth'
+
 class AxiomusApi::OrderRequest < AxiomusApi::Request
   xml_field :order
 

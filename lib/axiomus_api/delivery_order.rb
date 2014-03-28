@@ -1,3 +1,5 @@
+require_relative 'base_order'
+
 class AxiomusApi::DeliveryOrder < AxiomusApi::BaseOrder
   xml_field :address, xml_type: :attribute
   xml_field :d_date, xml_type: :attribute

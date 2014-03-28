@@ -1,3 +1,6 @@
+require_relative 'base_order'
+require_relative 'export_item'
+
 class AxiomusApi::ExportOrder < AxiomusApi::BaseOrder
   xml_field :export_quantity, xml_type: :attribute
   xml_field :transit, xml_type: :attribute

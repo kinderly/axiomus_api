@@ -1,3 +1,5 @@
+require_relative 'base'
+
 class AxiomusApi::RegionsCourierAddress < AxiomusApi::Base
   xml_field :region_code, xml_type: :attribute
   xml_field :city_code, xml_type: :attribute

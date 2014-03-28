@@ -1,3 +1,7 @@
+require_relative('request')
+require_relative('order_request')
+require_relative('status_request')
+
 module AxiomusApi::Actions
   ACTIONS = {
     new: AxiomusApi::OrderRequest,

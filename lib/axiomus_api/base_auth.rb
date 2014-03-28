@@ -1,3 +1,5 @@
+require_relative 'base'
+
 class AxiomusApi::BaseAuth < AxiomusApi::Base
   xml_field :ukey, xml_type: :attribute
 end

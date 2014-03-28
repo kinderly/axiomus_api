@@ -1,3 +1,5 @@
+require_relative('serializable')
+
 class AxiomusApi::Base
   include AxiomusApi::Serializable
 

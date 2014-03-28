@@ -1,3 +1,5 @@
+require_relative 'base'
+
 class AxiomusApi::RegionsSerivces < AxiomusApi::Base
   xml_field :cheque, xml_type: :attribute, optional: true
   xml_field :not_open, xml_type: :attribute, optional: true

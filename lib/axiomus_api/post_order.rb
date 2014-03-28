@@ -1,3 +1,7 @@
+require_relative 'base_order'
+require_relative 'post_address'
+require_relative 'post_services'
+
 class AxiomusApi::PostOrder < AxiomusApi::BaseOrder
   #уточнить
   xml_field :d_date, xml_type: :attribute

@@ -1,3 +1,5 @@
+require_relative 'base'
+
 class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_element :order
 
