@@ -1,4 +1,4 @@
-class AxiomusApi::Address < AxiomusApi::Base
+class AxiomusApi::PostAddress < AxiomusApi::Base
   xml_field :index
   xml_field :region
   xml_field :area

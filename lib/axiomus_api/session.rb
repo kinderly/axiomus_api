@@ -94,8 +94,6 @@ class AxiomusApi::Session
     AxiomusApi::StatusResponse.new(response.body)
   end
 
-  private
-
   def send_order_request(mode, order)
     xml_request = get_order_request(mode, order)
     response = send_request(xml_request)
@@ -107,6 +105,8 @@ class AxiomusApi::Session
 
     order_response
   end
+
+  private
 
   def get_order_request(mode, order)
     xml_request = create_request(:new)

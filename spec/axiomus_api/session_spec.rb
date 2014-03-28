@@ -26,13 +26,13 @@ describe 'AxiomusApi::Session' do
     describe :method do
       it 'should handle successful request' do
         HttpMocking.enqueue_response(DummyData.order_success_response(method))
-        response = @session.send(method, AxiomusApi::BaseOrder.new)
+        response = @session.send(method, DummyData.basic_order)
         expect(response.code).to eq 0
       end
 
       it 'should raise on error' do
         HttpMocking.enqueue_response(DummyData.order_error_response(method))
-        expect{@session.send(method, AxiomusApi::BaseOrder.new)}.to raise_error(AxiomusApi::Errors::OrderRequestError)
+        expect{@session.send(method, DummyData.basic_order)}.to raise_error(AxiomusApi::Errors::OrderRequestError)
       end
     end
   end

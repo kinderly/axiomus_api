@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version = ::AxiomusApi::VERSION
   s.authors = ["Kinderly LTD"]
   s.email = ["nuinuhin@gmail.com"]
-  s.homepage = "https://github.com/httplab/axiomus_api"
+  s.homepage = "https://github.com/kinderly/axiomus_api"
 
   s.summary = %q{A wrapper for Axiomus API}
   s.description = %q{This gem provides a Ruby wrapper over Axiomus API.}

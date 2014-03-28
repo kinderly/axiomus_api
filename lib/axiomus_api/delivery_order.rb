@@ -4,4 +4,9 @@ class AxiomusApi::DeliveryOrder < AxiomusApi::BaseOrder
   xml_field :b_time, xml_type: :attribute
   xml_field :e_time, xml_type: :attribute
   xml_field :incl_delivery_sum, xml_type: :attribute, optional: true
+
+  def initialize
+    super
+    @services = AxiomusApi::Services.new
+  end
 end
