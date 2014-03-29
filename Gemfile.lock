@@ -7,6 +7,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    codeclimate-test-reporter (0.3.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
@@ -45,5 +47,6 @@ PLATFORMS
 
 DEPENDENCIES
   axiomus_api!
+  codeclimate-test-reporter
   coveralls
   rspec

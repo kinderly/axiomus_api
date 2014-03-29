@@ -100,7 +100,7 @@ class AxiomusApi::Session
   end
 
   def send_order_request(mode, order)
-    if(!order.validate!)
+    if(!order.valid?)
       error_msg = order.validation_errors.join('\n')
       logger.error(error_msg)
       raise AxiomusApi::Errors::ValidationError.new, order.validation_errors.join(error_msg)
