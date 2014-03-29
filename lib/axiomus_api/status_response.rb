@@ -67,7 +67,8 @@ class AxiomusApi::StatusResponse
   def initialize(xml)
     doc = Nokogiri::XML(xml)
 
-    @d_date = Date.parse(doc.xpath('response/d_date').text)
+    xml_date = doc.xpath('response/d_date')
+    @d_date = Date.parse(xml_date.text) unless xml_date.empty?
     @order = Order.new(doc.xpath('response/order'))
     @refused_items = doc.xpath('response/refused_items/item').map do |node|
       Item.new(node)

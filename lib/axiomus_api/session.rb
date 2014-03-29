@@ -104,6 +104,9 @@ class AxiomusApi::Session
     order_response = AxiomusApi::OrderResponse.new(response.body)
 
     if !order_response.success?
+      logger.error(order_response.error_message)
+      logger.error("Request body: #{xml_request.to_xml}")
+      logger.error("Response raw: #{response.body}")
       raise AxiomusApi::Errors::OrderRequestError.new(order_response.code), order_response.error_message
     end
 
@@ -123,7 +126,11 @@ class AxiomusApi::Session
   def send_request(xml_request)
     connection = Net::HTTP.new(AxiomusApi::AXIOMUS_HOST, AxiomusApi::AXIOMUS_PORT)
     http_request = get_http_request(xml_request)
+    logger.info("Request to #{xml_request.mode}")
+    logger.debug("Request body: #{xml_request.to_xml}")
     response = connection.request(http_request)
+    logger.info("Response: #{response.code}")
+    logger.debug("Response raw: #{response.body}")
     response
   end
 
@@ -134,7 +141,11 @@ class AxiomusApi::Session
   def get_http_request(xml_request)
     res = ::Net::HTTP::Post.new(api_path)
     res.body = "data=#{xml_request.to_xml(true)}"
-    # res.content_type = 'text/xml'
     res
   end
+
+  def logger
+    ::AxiomusApi.logger
+  end
+
 end

@@ -22,10 +22,6 @@ class AxiomusApi::Base
     res.merge(@attr_info || {})
   end
 
-  def self.attribute_names
-    attribute_meta.keys?
-  end
-
   def self.tag_name
     if @xml_element.nil?
       if superclass.respond_to?(:tag_name)
@@ -40,14 +36,6 @@ class AxiomusApi::Base
 
   def tag_name
     self.class.tag_name
-  end
-
-  def attributes
-    res = self.class.attribute_meta.clone
-
-    res.each do |k|
-      res[k] = self.send(k)
-    end
   end
 
 end

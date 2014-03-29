@@ -1,8 +1,10 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
 describe 'AxiomusApi::Session' do
   before(:all) do
-    @session = AxiomusApi::Session.new(92, 'XXcd208495d565ef66e7dff9f98764XX', true)
+    AxiomusApi.logger.level = Logger::UNKNOWN
+
+    @session = AxiomusApi.test_session
   end
 
   [
@@ -23,7 +25,7 @@ describe 'AxiomusApi::Session' do
     :new_region_pickup,
     :update_region_pickup
   ].each do |method|
-    describe :method do
+    describe ".#{method}" do
       it 'should handle successful request' do
         HttpMocking.enqueue_response(DummyData.order_success_response(method))
         response = @session.send(method, DummyData.basic_order)
