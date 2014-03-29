@@ -10,39 +10,6 @@ module DummyData
     ORDER_ERROR_RESPONSE % {:mode => mode, :code => code, :description => description}
   end
 
-  def self.basic_order(type = AxiomusApi::BaseOrder, service_type = AxiomusApi::Services, item_type = AxiomusApi::Item)
-    res = type.new
-    res.inner_id = '11111'
-    res.name = 'John Galt'
-    res.from_mkad = 2
-    res.places = 1
-    res.city = 0
-    res.sms = '79034000000'
-    res.sms_sender = 'Mbon'
-    res.garden_ring = 'no'
-    res.contacts = 'John Galt'
-    res.description = 'Fragile.'
-    res.services = service_type.new.tap do |s|
-      s.big = 'yes'
-    end
-    res.items = [
-      item_type.new.tap do |it|
-        it.name = 'Magic Wand'
-        it.weight = 0.4
-        it.quantity = 2
-        it.price = 1000.2
-      end,
-
-      item_type.new.tap do |it|
-        it.name = 'Magic Hat'
-        it.weight = 0.3
-        it.quantity = 4
-        it.price = 3000.49
-      end
-    ]
-    res
-  end
-
   ORDER_SUCCESS_RESPONSE = <<-XML
   <?xml version='1.0' standalone='yes'?>
   <response>

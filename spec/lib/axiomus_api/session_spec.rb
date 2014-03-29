@@ -25,21 +25,21 @@ describe 'AxiomusApi::Session' do
     :new_region_pickup,
     :update_region_pickup
   ].each do |method|
-    describe ".#{method}" do
+    describe "##{method}" do
       it 'should handle successful request' do
         HttpMocking.enqueue_response(DummyData.order_success_response(method))
-        response = @session.send(method, DummyData.basic_order)
+        response = @session.send(method, build(:base_order))
         expect(response.code).to eq 0
       end
 
       it 'should raise on error' do
         HttpMocking.enqueue_response(DummyData.order_error_response(method))
-        expect{@session.send(method, DummyData.basic_order)}.to raise_error(AxiomusApi::Errors::RequestError)
+        expect{@session.send(method, build(:base_order))}.to raise_error(AxiomusApi::Errors::RequestError)
       end
     end
   end
 
-  describe '.get_regions' do
+  describe '#get_regions' do
     it 'should handle successfull request' do
       HttpMocking.enqueue_response(DummyData::REGIONS_SUCCESS_RESPONSE)
       z = @session.get_regions()
@@ -48,7 +48,7 @@ describe 'AxiomusApi::Session' do
     end
   end
 
-  describe '.status' do
+  describe '#status' do
     it 'should handle successfull request' do
       HttpMocking.enqueue_response(DummyData::STATUS_SUCCESS_RESPONSE)
       z = @session.status('2e3023c3e78f4f0c8cbb81257743c2d7')

@@ -6,14 +6,14 @@ describe 'AxiomusApi::Sesion' do
     @session = AxiomusApi.test_session
   end
 
-  describe '.get_regions' do
+  describe '#get_regions' do
     it 'should handle successfull request' do
       z = @session.get_regions()
       expect(z.regions.count > 0).to be_true
     end
   end
 
-  describe '.status' do
+  describe '#status' do
     it 'should handle successfull request' do
       z = @session.status('2e3023c3e78f4f0c8cbb81257743c2d7')
     end
@@ -37,9 +37,9 @@ describe 'AxiomusApi::Sesion' do
     :new_region_pickup,
     :update_region_pickup
   ].each do |method|
-    describe ".#{method}" do
+    describe "##{method}" do
       it 'should handle successful request' do
-        response = @session.send(method, DummyData.basic_order)
+        response = @session.send(method, build(:base_order))
         expect(response.code).to eq 0
       end
     end
