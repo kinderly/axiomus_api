@@ -1,6 +1,6 @@
-require_relative('request')
-require_relative('order_request')
-require_relative('status_request')
+require_relative('request/request')
+require_relative('request/order_request')
+require_relative('request/status_request')
 
 module AxiomusApi::Actions
   ACTIONS = {

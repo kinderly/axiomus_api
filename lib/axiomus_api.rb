@@ -28,7 +28,7 @@ require_relative('axiomus_api/actions')
 require_relative('axiomus_api/errors')
 require_relative('axiomus_api/response_codes')
 
-Dir.glob(File.join(File.dirname(__FILE__),'axiomus_api/*.rb')).each do |file|
+Dir.glob(File.join(File.dirname(__FILE__),'axiomus_api/**/*.rb')).each do |file|
   require_relative(file)
 end
 

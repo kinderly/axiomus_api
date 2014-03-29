@@ -1,8 +1,8 @@
 require 'net/http'
 require_relative 'actions'
-require_relative 'regions_response'
-require_relative 'status_response'
-require_relative 'order_response'
+require_relative 'response/regions_response'
+require_relative 'response/status_response'
+require_relative 'response/order_response'
 
 class AxiomusApi::Session
   include AxiomusApi::Actions

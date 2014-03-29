@@ -1,5 +1,5 @@
-require_relative 'base'
-require_relative 'base_auth'
+require_relative '../base'
+require_relative '../base_auth'
 
 class AxiomusApi::Request < AxiomusApi::Base
 

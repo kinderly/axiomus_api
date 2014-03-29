@@ -1,6 +1,6 @@
 require_relative 'base_order'
-require_relative 'post_address'
-require_relative 'post_services'
+require_relative '../address/post_address'
+require_relative '../services/post_services'
 
 class AxiomusApi::PostOrder < AxiomusApi::BaseOrder
   #уточнить

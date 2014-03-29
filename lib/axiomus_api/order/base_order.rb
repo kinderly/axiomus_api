@@ -1,5 +1,5 @@
-require_relative 'base'
-require_relative 'services'
+require_relative '../base'
+require_relative '../services/services'
 
 class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_element :order

@@ -1,6 +1,6 @@
 require_relative 'base_order'
-require_relative 'export_item'
-require_relative 'export_services'
+require_relative '../item/export_item'
+require_relative '../services/export_services'
 
 class AxiomusApi::ExportOrder < AxiomusApi::BaseOrder
 
