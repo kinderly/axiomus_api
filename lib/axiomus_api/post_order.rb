@@ -4,9 +4,8 @@ require_relative 'post_services'
 
 class AxiomusApi::PostOrder < AxiomusApi::BaseOrder
   #уточнить
-  xml_field :d_date, xml_type: :attribute
-  xml_field :post_type, xml_type: :attribute
-  xml_field :incl_delivery_sum, xml_type: :attribute, optional: true
+  xml_attribute :d_date, :post_type
+  xml_attribute :incl_delivery_sum, optional: true
   xml_field :address
 
   def initialize

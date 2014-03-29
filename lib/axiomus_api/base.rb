@@ -7,15 +7,28 @@ class AxiomusApi::Base
     @xml_element = element_name
   end
 
-  def self.xml_field(attr_name, hash = {})
-    hash.keys.each do |k|
+  def self.xml_field(*args)
+    options = extract_options(args)
+
+    options.keys.each do |k|
       raise "Wrong attribute #{k}" if ![:xml_type, :xml_name, :optional].include?(k)
     end
 
-    @attr_info ||= {}
-    @attr_info[attr_name] = hash
-    attr_accessor attr_name
+    args.each do |attr_name|
+      @attr_info ||= {}
+      @attr_info[attr_name] = options
+      attr_accessor attr_name
+    end
   end
+
+
+  def self.xml_attribute(*args)
+    options = extract_options(args)
+    args << options.merge({xml_type: :attribute})
+    xml_field(*args)
+  end
+
+
 
   def self.attribute_meta
     res = superclass.respond_to?(:attribute_meta) ? superclass.attribute_meta  : {}
@@ -36,6 +49,14 @@ class AxiomusApi::Base
 
   def tag_name
     self.class.tag_name
+  end
+
+  def self.extract_options(args)
+    if args.last.is_a?(Hash) && args.last.instance_of?(Hash)
+      args.pop
+    else
+      {}
+    end
   end
 
 end

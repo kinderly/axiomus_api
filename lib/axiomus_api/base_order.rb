@@ -3,19 +3,10 @@ require_relative 'base'
 class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_element :order
 
-  xml_field :inner_id, xml_type: :attribute, optional: true
-  xml_field :name, xml_type: :attribute
-  xml_field :from_mkad, xml_type: :attribute, optional: true
-  xml_field :places, xml_type: :attribute
-  xml_field :city, xml_type: :attribute
-  xml_field :sms, optional: true, xml_type: :attribute
-  xml_field :sms_sender, optional: true, xml_type: :attribute
-  xml_field :garden_ring, optional: true, xml_type: :attribute
-  xml_field :contacts
-  xml_field :description, optional: true
-  xml_field :services, optional: true
-  xml_field :items
-  xml_field :okey, optional: true, xml_type: :attribute
+  xml_field :contacts, :items
+  xml_field :services, :description
+  xml_attribute :inner_id, :from_mkad, :okey, :sms_sender, :garden_ring, :sms, optional: true
+  xml_attribute :name, :places, :city
 
   def initialize
     @items = []

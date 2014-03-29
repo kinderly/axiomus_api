@@ -1,11 +1,9 @@
 require_relative 'base_order'
 
 class AxiomusApi::DeliveryOrder < AxiomusApi::BaseOrder
-  xml_field :address, xml_type: :attribute
-  xml_field :d_date, xml_type: :attribute
-  xml_field :b_time, xml_type: :attribute
-  xml_field :e_time, xml_type: :attribute
-  xml_field :incl_delivery_sum, xml_type: :attribute, optional: true
+
+  xml_attribute :address, :d_date, :b_date, :b_time, :e_time
+  xml_attribute :incl_delivery_sum, optional: true
 
   def initialize
     super

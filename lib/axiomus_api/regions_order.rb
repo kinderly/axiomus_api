@@ -1,9 +1,7 @@
 require_relative 'base_order'
 
 class AxiomusApi::RegionsOrder < AxiomusApi::BaseOrder
-  xml_field :d_date, xml_type: :attribute
-  xml_field :b_time, xml_type: :attribute
-  xml_field :e_time, xml_type: :attribute
-  xml_field :incl_deliv_sum, xml_type: :attribute, optional: true
+  xml_attribute :d_date, :b_time, :e_time
+  xml_attribute :incl_deliv_sum, optional: true
   xml_field :address
 end
