@@ -95,19 +95,24 @@ class AxiomusApi::Session
     xml_request.auth = nil
     xml_request.okey = okey
     response = send_request(xml_request)
-    AxiomusApi::StatusResponse.new(response.body)
+    status_response = AxiomusApi::StatusResponse.new(response.body)
+    status_response
   end
 
   def send_order_request(mode, order)
+    if(!order.validate!)
+      error_msg = order.validation_errors.join('\n')
+      logger.error(error_msg)
+      raise AxiomusApi::Errors::ValidationError.new, order.validation_errors.join(error_msg)
+    end
+
     xml_request = get_order_request(mode, order)
     response = send_request(xml_request)
     order_response = AxiomusApi::OrderResponse.new(response.body)
 
     if !order_response.success?
-      logger.error(order_response.error_message)
-      logger.error("Request body: #{xml_request.to_xml}")
-      logger.error("Response raw: #{response.body}")
-      raise AxiomusApi::Errors::OrderRequestError.new(order_response.code), order_response.error_message
+      log_response_error(order_response.error_message, xml_request.to_xml, response.body)
+      raise AxiomusApi::Errors::RequestError.new(order_response.code), order_response.error_message
     end
 
     order_response
@@ -146,6 +151,12 @@ class AxiomusApi::Session
 
   def logger
     ::AxiomusApi.logger
+  end
+
+  def log_response_error(description, xml_request, xml_response)
+    logger.error(description)
+    logger.error("Request body: #{xml_request}")
+    logger.error("Response raw: #{xml_response}")
   end
 
 end

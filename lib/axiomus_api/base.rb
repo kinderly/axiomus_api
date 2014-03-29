@@ -1,7 +1,9 @@
 require_relative('serializable')
+require_relative('validated')
 
 class AxiomusApi::Base
   include AxiomusApi::Serializable
+  include AxiomusApi::Validated
 
   def self.xml_element(element_name)
     @xml_element = element_name
@@ -11,7 +13,7 @@ class AxiomusApi::Base
     options = extract_options(args)
 
     options.keys.each do |k|
-      raise "Wrong attribute #{k}" if ![:xml_type, :xml_name, :optional].include?(k)
+      raise "Wrong attribute #{k}" if ![:xml_type, :xml_name, :optional, :type].include?(k)
     end
 
     args.each do |attr_name|
@@ -21,14 +23,11 @@ class AxiomusApi::Base
     end
   end
 
-
   def self.xml_attribute(*args)
     options = extract_options(args)
     args << options.merge({xml_type: :attribute})
     xml_field(*args)
   end
-
-
 
   def self.attribute_meta
     res = superclass.respond_to?(:attribute_meta) ? superclass.attribute_meta  : {}
@@ -56,6 +55,14 @@ class AxiomusApi::Base
       args.pop
     else
       {}
+    end
+  end
+
+  def initialize
+    self.class.attribute_meta.each do |k, v|
+      if v[:type]
+        self.send("#{k}=".to_sym, v[:type].new)
+      end
     end
   end
 

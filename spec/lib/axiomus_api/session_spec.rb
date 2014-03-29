@@ -34,7 +34,7 @@ describe 'AxiomusApi::Session' do
 
       it 'should raise on error' do
         HttpMocking.enqueue_response(DummyData.order_error_response(method))
-        expect{@session.send(method, DummyData.basic_order)}.to raise_error(AxiomusApi::Errors::OrderRequestError)
+        expect{@session.send(method, DummyData.basic_order)}.to raise_error(AxiomusApi::Errors::RequestError)
       end
     end
   end

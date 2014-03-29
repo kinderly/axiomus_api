@@ -63,6 +63,7 @@ class AxiomusApi::StatusResponse
   attr_accessor :packs
   attr_accessor :order
   attr_accessor :status
+  attr_accessor :code
 
   def initialize(xml)
     doc = Nokogiri::XML(xml)

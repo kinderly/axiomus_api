@@ -1,14 +1,17 @@
 require_relative 'base'
+require_relative 'services'
 
 class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_element :order
 
   xml_field :contacts, :items
-  xml_field :services, :description
+  xml_field :description
   xml_attribute :inner_id, :from_mkad, :okey, :sms_sender, :garden_ring, :sms, optional: true
   xml_attribute :name, :places, :city
+  xml_field :services, type: AxiomusApi::Services
 
   def initialize
+    super
     @items = []
   end
 

@@ -8,4 +8,15 @@ class AxiomusApi::RegionsPickupOrder < AxiomusApi::RegionsOrder
     @address = AxiomusApi::RegionsPickupAddress
   end
 
+  def validate!
+    if super
+      if !@address.is_a?(AxiomusApi::RegionsPickupAddress)
+        @validation_errors = 'field address must be of type AxiomusApi::RegionsPickupAddress'
+      else
+        true
+      end
+    else
+      false
+    end
+  end
 end
