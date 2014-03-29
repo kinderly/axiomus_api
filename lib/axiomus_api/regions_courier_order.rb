@@ -3,9 +3,6 @@ require_relative 'regions_courier_address'
 
 class AxiomusApi::RegionsCourierOrder < AxiomusApi::RegionsOrder
 
-  def initialize
-    super
-    @address = AxiomusApi::RegionsCourierAddress
-  end
+  xml_field :address, type: AxiomusApi::RegionsCourierAddress
 
 end

@@ -3,20 +3,6 @@ require_relative 'regions_pickup_address'
 
 class AxiomusApi::RegionsPickupOrder < AxiomusApi::RegionsOrder
 
-  def initialize
-    super
-    @address = AxiomusApi::RegionsPickupAddress
-  end
+  xml_field :address, type: AxiomusApi::RegionsPickupAddress
 
-  def validate!
-    if super
-      if !@address.is_a?(AxiomusApi::RegionsPickupAddress)
-        @validation_errors = 'field address must be of type AxiomusApi::RegionsPickupAddress'
-      else
-        true
-      end
-    else
-      false
-    end
-  end
 end

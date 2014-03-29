@@ -6,11 +6,7 @@ class AxiomusApi::PostOrder < AxiomusApi::BaseOrder
   #уточнить
   xml_attribute :d_date, :post_type
   xml_attribute :incl_delivery_sum, optional: true
-  xml_field :address
+  xml_field :address, type: AxiomusApi::PostAddress
+  xml_field :services, type: AxiomusApi::PostServices
 
-  def initialize
-    super
-    @address = AxiomusApi::PostAddress.new
-    @services = AxiomusApi::PostServices.new
-  end
 end
