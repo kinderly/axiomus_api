@@ -1,5 +1,6 @@
 require_relative('base_order')
 require_relative('../address/dpd_address')
+require_relative('../services/post_services')
 
 class AxiomusApi::DpdOrder < AxiomusApi::BaseOrder
 

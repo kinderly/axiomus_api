@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.test_files = `git ls-files -- {spec}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency('nokogiri')
+  s.add_dependency('nokogiri', '~>1.6')
 end

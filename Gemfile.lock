@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     axiomus_api (0.1)
-      nokogiri
+      nokogiri (~> 1.6)
 
 GEM
   remote: https://rubygems.org/
