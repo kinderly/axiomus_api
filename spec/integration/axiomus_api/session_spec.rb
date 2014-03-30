@@ -15,12 +15,12 @@ describe 'AxiomusApi::Sesion' do
 
   describe '#new, #update' do
     it 'should create new order and update it' do
-      delivery_order = build(:delivery_order)
-      z = @session.new(delivery_order)
+      order = build(:order)
+      z = @session.new(order)
       expect(z.code).to eq 0
       okey = z.okey
-      delivery_order.okey = okey
-      z = @session.update(delivery_order)
+      order.okey = okey
+      z = @session.update(order)
       expect(z.code).to eq 0
       z = @session.status(okey)
     end
@@ -28,12 +28,12 @@ describe 'AxiomusApi::Sesion' do
 
   describe '#new_carry, #update_carry' do
     it 'should create new order and update it' do
-      pickup_order = build(:pickup_order)
-      z = @session.new_carry(pickup_order)
+      carry_order = build(:carry_order)
+      z = @session.new_carry(carry_order)
       expect(z.code).to eq 0
       okey = z.okey
-      pickup_order.okey = okey
-      z = @session.update_carry(pickup_order)
+      carry_order.okey = okey
+      z = @session.update_carry(carry_order)
       expect(z.code).to eq 0
       z = @session.status(okey)
     end
@@ -106,7 +106,7 @@ describe 'AxiomusApi::Sesion' do
 
   describe '#new_region_courier, #update_region_courier' do
     it 'should create new order and update it' do
-      region_courier_order = build(:regions_courier_order)
+      region_courier_order = build(:region_courier_order)
       z = @session.new_region_courier(region_courier_order)
       expect(z.code).to eq 0
       okey = z.okey
@@ -118,7 +118,7 @@ describe 'AxiomusApi::Sesion' do
 
   describe '#new_region_pickup, #update_region_pickup' do
     it 'should create new order and update it' do
-      region_pickup_order = build(:regions_pickup_order)
+      region_pickup_order = build(:region_pickup_order)
       z = @session.new_region_pickup(region_pickup_order)
       expect(z.code).to eq 0
       okey = z.okey

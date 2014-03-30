@@ -43,7 +43,7 @@ FactoryGirl.define do
     big {generate :boolean}
   end
 
-  factory :regions_services, class: AxiomusApi::RegionsServices do
+  factory :region_services, class: AxiomusApi::RegionServices do
     cheque {generate :boolean}
     not_open {generate :boolean}
     extrapack {generate :boolean}
@@ -89,7 +89,7 @@ FactoryGirl.define do
     region 'обл Ростовская'
   end
 
-  factory :regions_courier_address, class: AxiomusApi::RegionsCourierAddress do
+  factory :region_courier_address, class: AxiomusApi::RegionCourierAddress do
     region_code 33
     city_code 29
     index '344018'
@@ -98,11 +98,11 @@ FactoryGirl.define do
     apartment 21
   end
 
-  factory :regions_pickup_address, class: AxiomusApi::RegionsPickupAddress do
+  factory :region_pickup_address, class: AxiomusApi::RegionPickupAddress do
     office_code 32
   end
 
-  factory :delivery_order, class: AxiomusApi::DeliveryOrder, parent: :base_order do
+  factory :order, class: AxiomusApi::Order, parent: :base_order do
     trait :incl_delivery_sum do
       incl_delivery_sum rand(100.0..200.00)
     end
@@ -117,7 +117,7 @@ FactoryGirl.define do
     from_mkad {rand(1..2) == 2 && garden_ring !='yes' && city > 0 ? rand(1..40) : nil}
   end
 
-  factory :pickup_order, class: AxiomusApi::PickupOrder, parent: :base_order do
+  factory :carry_order, class: AxiomusApi::CarryOrder, parent: :base_order do
     sms {rand(1..2) ? generate(:sms) : nil}
     office {[0, 1, nil][rand(0..2)]}
     b_date {Time.now + rand(5..10)*24*60*60}
@@ -173,19 +173,19 @@ FactoryGirl.define do
     contacts {generate(:sms)}
   end
 
-  factory :regions_order, class: AxiomusApi::RegionsOrder, parent: :base_order do
+  factory :region_order, class: AxiomusApi::RegionOrder, parent: :base_order do
     d_date {(Time.now + rand(5..15)*24*60*60).strftime('%Y-%m-%d')}
     b_time {rand(10..17)}
     e_time {b_time + 1}
-    services {build(:regions_services)}
+    services {build(:region_services)}
   end
 
-  factory :regions_courier_order, class: AxiomusApi::RegionsCourierOrder, parent: :regions_order do
-    address {build(:regions_courier_address)}
+  factory :region_courier_order, class: AxiomusApi::RegionCourierOrder, parent: :region_order do
+    address {build(:region_courier_address)}
   end
 
-  factory :regions_pickup_order, class: AxiomusApi::RegionsPickupOrder, parent: :regions_order do
-    address {build(:regions_pickup_address)}
+  factory :region_pickup_order, class: AxiomusApi::RegionPickupOrder, parent: :region_order do
+    address {build(:region_pickup_address)}
   end
 
   factory :dpd_order, class: AxiomusApi::DpdOrder, parent: :base_order do

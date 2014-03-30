@@ -1,6 +1,6 @@
 require_relative '../base'
 
-class AxiomusApi::RegionsPickupAddress < AxiomusApi::Base
+class AxiomusApi::RegionPickupAddress < AxiomusApi::Base
 
   xml_attribute :office_code
 

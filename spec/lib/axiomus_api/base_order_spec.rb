@@ -26,8 +26,8 @@ end
 {
   AxiomusApi::EmsOrder => AxiomusApi::EmsAddress,
   AxiomusApi::PostOrder => AxiomusApi::PostAddress,
-  AxiomusApi::RegionsCourierOrder => AxiomusApi::RegionsCourierAddress,
-  AxiomusApi::RegionsPickupOrder => AxiomusApi::RegionsPickupAddress,
+  AxiomusApi::RegionCourierOrder => AxiomusApi::RegionCourierAddress,
+  AxiomusApi::RegionPickupOrder => AxiomusApi::RegionPickupAddress,
   AxiomusApi::DpdOrder => AxiomusApi::DpdAddress
 }.each do |c, a|
   describe c.name do
@@ -38,13 +38,13 @@ end
 end
 
 {
-  AxiomusApi::DeliveryOrder => AxiomusApi::Services,
+  AxiomusApi::Order => AxiomusApi::Services,
   AxiomusApi::EmsOrder => AxiomusApi::PostServices,
   AxiomusApi::ExportOrder => AxiomusApi::ExportServices,
-  AxiomusApi::PickupOrder => AxiomusApi::Services,
+  AxiomusApi::CarryOrder => AxiomusApi::Services,
   AxiomusApi::PostOrder => AxiomusApi::PostServices,
-  AxiomusApi::RegionsCourierOrder => AxiomusApi::RegionsServices,
-  AxiomusApi::RegionsPickupOrder => AxiomusApi::RegionsServices,
+  AxiomusApi::RegionCourierOrder => AxiomusApi::RegionServices,
+  AxiomusApi::RegionPickupOrder => AxiomusApi::RegionServices,
   AxiomusApi::DpdOrder => AxiomusApi::PostServices
 }.each do |c, a|
   describe c.name do

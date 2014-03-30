@@ -29,10 +29,10 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
 
   def self.create_by_mode(mode)
     {
-      new: AxiomusApi::DeliveryOrder,
-      update: AxiomusApi::DeliveryOrder,
-      new_carry: AxiomusApi::PickupOrder,
-      update_carry: AxiomusApi::PickupOrder,
+      new: AxiomusApi::Order,
+      update: AxiomusApi::Order,
+      new_carry: AxiomusApi::CarryOrder,
+      update_carry: AxiomusApi::CarryOrder,
       new_export: AxiomusApi::ExportOrder,
       update_export: AxiomusApi::ExportOrder,
       new_self_export: AxiomusApi::SelfExportOrder,
@@ -43,10 +43,10 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
       update_dpd: AxiomusApi::DpdOrder,
       new_ems: AxiomusApi::EmsOrder,
       update_ems: AxiomusApi::EmsOrder,
-      new_region_courier: AxiomusApi::RegionsCourierOrder,
-      update_region_courier: AxiomusApi::RegionsCourierOrder,
-      new_region_pickup: AxiomusApi::RegionsPickupOrder,
-      update_region_pickup: AxiomusApi::RegionsPickupOrder
+      new_region_courier: AxiomusApi::RegionCourierOrder,
+      update_region_courier: AxiomusApi::RegionCourierOrder,
+      new_region_pickup: AxiomusApi::RegionPickupOrder,
+      update_region_pickup: AxiomusApi::RegionPickupOrder
     }[mode].new
   end
 
