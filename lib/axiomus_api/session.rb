@@ -121,7 +121,7 @@ class AxiomusApi::Session
   private
 
   def get_order_request(mode, order)
-    xml_request = create_request(:new)
+    xml_request = create_request(mode)
     xml_request.auth.ukey = @ukey
     xml_request.order = order
     xml_request.prepare_checksum(@uid)

@@ -1,3 +1,5 @@
+#coding utf-8
+
 FactoryGirl.define do
   sequence :inner_id do |n|
     n
@@ -5,6 +7,40 @@ FactoryGirl.define do
 
   sequence :sms do |n|
     (79030000000+n).to_s
+  end
+
+  sequence :boolean do
+    ['yes', 'no'][rand(0..1)]
+  end
+
+  factory :item, class: AxiomusApi::Item do
+    name {"Product #{rand(1..1000)}"}
+    weight {rand(0.1..10.0)}
+    quantity {rand(1..10)}
+    price {rand(0.5..10000.0)}
+  end
+
+  factory :export_item, class: AxiomusApi::ExportItem, parent: :item do
+    oid {rand(10000..99999)}
+  end
+
+  factory :services, class: AxiomusApi::Services do
+    cash {generate :boolean}
+    cheque {generate :boolean}
+    card {generate :boolean}
+    big {generate :boolean}
+  end
+
+  factory :export_services, class: AxiomusApi::ExportServices do
+    transit {generate :boolean}
+    warrant {generate :boolean}
+  end
+
+  factory :post_services, class: AxiomusApi::PostServices do
+    valuation {generate :boolean}
+    fragile {generate :boolean}
+    cod {generate :boolean}
+    big {generate :boolean}
   end
 
   factory :base_order, class: AxiomusApi::BaseOrder do
@@ -18,10 +54,7 @@ FactoryGirl.define do
     end
 
     places {rand(1..2)}
-    garden_ring {rand(1..2) == 2 ? 'yes' : 'no'}
-    from_mkad {rand(1..2) == 2 && garden_ring !='yes' && city > 0 ? rand(1..40) : nil}
-    sms {rand(1..2) ? generate(:sms) : nil}
-    city {garden_ring == 'yes' ? 0 : rand(0..200)}
+    services {build(:services)}
 
     after(:build) do |order|
       rand(1..10).times do
@@ -30,14 +63,76 @@ FactoryGirl.define do
     end
   end
 
-  factory :item, class: AxiomusApi::Item do
-    name {"Product #{rand(1..1000)}"}
-    weight {rand(0.1..10.0)}
-    quantity {rand(1..10)}
-    price {rand(0.5..10000.0)}
+  factory :post_address, class: AxiomusApi::PostAddress do
+    index '344018'
+    region 'обл Ростовская'
+    area 'Ростов-на-Дону'
+    p_address 'пер. Соборный, д61, кв21'
   end
 
-  factory :export_item, class: AxiomusApi::ExportItem, parent: :item do
-    oid {rand(10000..99999)}
+  factory :delivery_order, class: AxiomusApi::DeliveryOrder, parent: :base_order do
+    trait :incl_delivery_sum do
+      incl_delivery_sum rand(100.0..200.00)
+    end
+
+    sms {rand(1..2) ? generate(:sms) : nil}
+    d_date {Time.now + rand(1..10)*24*60*60}
+    b_time {rand(10..19)}
+    e_time {b_time + 3}
+    address 'Москва, Живописная, д4 корп1, кв 16'
+    city 0
+    garden_ring {generate :boolean}
+    from_mkad {rand(1..2) == 2 && garden_ring !='yes' && city > 0 ? rand(1..40) : nil}
   end
+
+  factory :pickup_order, class: AxiomusApi::PickupOrder, parent: :base_order do
+    sms {rand(1..2) ? generate(:sms) : nil}
+    office {[0, 1, nil][rand(0..2)]}
+    b_date {Time.now + rand(5..10)*24*60*60}
+    e_date {b_date + 7*24*60*60}
+  end
+
+  factory :export_order, class: AxiomusApi::ExportOrder, parent: :base_order do
+    export_quantity {rand(1..3)}
+    transit {generate :boolean}
+    d_date {Time.now + rand(1..10)*24*60*60}
+    b_time {rand(10..19)}
+    e_time {b_time + 3}
+    services {build(:export_services)}
+    address 'Москва, Живописная, д4 корп1, кв 16'
+    garden_ring {generate :boolean}
+    from_mkad {garden_ring == 'yes' ? nil : rand(1..40)}
+
+    after(:build) do |order|
+      order.items = []
+      rand(1..10).times do
+        order.items << build(:export_item)
+      end
+    end
+  end
+
+  factory :self_export_order, class: AxiomusApi::SelfExportOrder, parent: :base_order do
+    car 'с065мк61'
+    d_date {Time.now + rand(1..10)*24*60*60}
+    b_time {rand(10..19)}
+    e_time {b_time + 3}
+    quantity {rand(1..3)}
+
+    after(:build) do |order|
+      order.items = []
+      rand(1..10).times do
+        order.items << build(:export_item)
+      end
+    end
+  end
+
+  factory :post_order, class: AxiomusApi::PostOrder, parent: :base_order do
+    d_date {Time.now + rand(1..10)*24*60*60}
+    post_type {rand(1..2)}
+    address {build(:post_address)}
+    services {build(:post_services)}
+    contacts {generate(:sms)}
+  end
+
+
 end

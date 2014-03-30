@@ -6,8 +6,8 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
 
   xml_field :contacts, :items
   xml_field :description
-  xml_attribute :inner_id, :from_mkad, :okey, :sms_sender, :garden_ring, :sms, optional: true
-  xml_attribute :name, :places, :city
+  xml_attribute :inner_id, :okey, optional: true
+  xml_attribute :name, :places
   xml_field :services, type: AxiomusApi::Services
 
   def initialize
