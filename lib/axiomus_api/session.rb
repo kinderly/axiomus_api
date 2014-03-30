@@ -19,52 +19,14 @@ class AxiomusApi::Session
     end
   end
 
-  def new(order)
-    send_order_request(:new, order)
-  end
-
-  def update(order)
-    send_order_request(:update, order)
-  end
-
-  def new_carry(order)
-    send_order_request(:new_carry, order)
-  end
-
-  def update_carry(order)
-    send_order_request(:update_carry, order)
-  end
-
-  def new_export(order)
-    send_order_request(:new_export, order)
-  end
-
-  def update_export(order)
-    send_order_request(:update_export, order)
-  end
-
-  def new_self_export(order)
-    send_order_request(:new_self_export, order)
-  end
-
-  def update_self_export(order)
-    send_order_request(:update_self_export, order)
-  end
-
-  def new_post(order)
-    send_order_request(:new_post, order)
-  end
-
-  def update_post(order)
-    send_order_request(:update_post, order)
-  end
-
-  def new_ems(order)
-    send_order_request(:new_ems, order)
-  end
-
-  def update_ems(order)
-    send_order_request(:update_ems, order)
+  ['', '_carry', '_export', '_self_export', '_post', '_dpd',
+   '_ems', '_region_courier', '_region_pickup'].each do |suffix|
+    [:new, :update].each do |prefix|
+      m_name = "#{prefix}#{suffix}".to_sym
+      define_method("#{prefix}#{suffix}") do |order|
+        send_order_request(m_name, order)
+      end
+    end
   end
 
   def get_regions()
@@ -72,22 +34,6 @@ class AxiomusApi::Session
     xml_request.auth.ukey = @ukey
     response = send_request(xml_request)
     AxiomusApi::RegionsResponse.new (response.body)
-  end
-
-  def new_region_courier(order)
-    send_order_request(:new_region_courier, order)
-  end
-
-  def update_region_courier(order)
-    send_order_request(:update_region_courier, order)
-  end
-
-  def new_region_pickup(order)
-    send_order_request(:new_region_pickup, order)
-  end
-
-  def update_region_pickup(order)
-    send_order_request(:update_region_pickup, order)
   end
 
   def status(okey)

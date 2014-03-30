@@ -14,6 +14,8 @@ module AxiomusApi::Actions
     update_self_export: AxiomusApi::OrderRequest,
     new_post: AxiomusApi::OrderRequest,
     update_post: AxiomusApi::OrderRequest,
+    new_dpd: AxiomusApi::OrderRequest,
+    update_dpd: AxiomusApi::OrderRequest,
     new_ems: AxiomusApi::OrderRequest,
     update_ems: AxiomusApi::OrderRequest,
     get_regions: AxiomusApi::Request,

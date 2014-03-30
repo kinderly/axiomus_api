@@ -39,6 +39,8 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
       update_self_export: AxiomusApi::SelfExportOrder,
       new_post: AxiomusApi::PostOrder,
       update_post: AxiomusApi::PostOrder,
+      new_dpd: AxiomusApi::DpdOrder,
+      update_dpd: AxiomusApi::DpdOrder,
       new_ems: AxiomusApi::EmsOrder,
       update_ems: AxiomusApi::EmsOrder,
       new_region_courier: AxiomusApi::RegionsCourierOrder,
@@ -48,7 +50,4 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
     }[mode].new
   end
 
-  ORDER_MODES = [:new, :update, :new_carry, :update_carry, :new_export, :update_export,
-    :new_self_export, :update_self_export, :new_post, :update_post, :new_ems, :update_ems,
-    :new_region_courier, :update_region_courier, :new_region_pickup, :update_region_pickup]
 end

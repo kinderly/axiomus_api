@@ -85,6 +85,10 @@ FactoryGirl.define do
     apartment '21'
   end
 
+  factory :dpd_address, class: AxiomusApi::DpdAddress, parent: :ems_address do
+    region 'обл Ростовская'
+  end
+
   factory :regions_courier_address, class: AxiomusApi::RegionsCourierAddress do
     region_code 33
     city_code 29
@@ -182,6 +186,15 @@ FactoryGirl.define do
 
   factory :regions_pickup_order, class: AxiomusApi::RegionsPickupOrder, parent: :regions_order do
     address {build(:regions_pickup_address)}
+  end
+
+  factory :dpd_order, class: AxiomusApi::DpdOrder, parent: :base_order do
+    post_type {rand(1..2)}
+    services {build(:post_services)}
+    address {build(:dpd_address)}
+    d_date {(Time.now + rand(5..15)*24*60*60).strftime('%Y-%m-%d')}
+    b_time {rand(10..17)}
+    e_time {b_time + 1}
   end
 
 end

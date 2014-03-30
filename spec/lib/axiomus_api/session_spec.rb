@@ -7,24 +7,7 @@ describe 'AxiomusApi::Session' do
     @session = AxiomusApi.test_session
   end
 
-  [
-    :new,
-    :update,
-    :new_carry,
-    :update_carry,
-    :new_export,
-    :update_export,
-    :new_self_export,
-    :update_self_export,
-    :new_post,
-    :update_post,
-    :new_ems,
-    :update_ems,
-    :new_region_courier,
-    :update_region_courier,
-    :new_region_pickup,
-    :update_region_pickup
-  ].each do |method|
+  ORDER_MODES.each do |method|
     describe "##{method}" do
       it 'should handle successful request' do
         HttpMocking.enqueue_response(DummyData.order_success_response(method))

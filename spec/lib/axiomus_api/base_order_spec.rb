@@ -1,14 +1,15 @@
 require_relative '../../spec_helper'
 
 describe 'AxiomusApi::BaseOrder' do
+
   it 'should build order by mode' do
-    AxiomusApi::BaseOrder::ORDER_MODES.each do |mode|
+    ORDER_MODES.each do |mode|
       order = AxiomusApi::BaseOrder.create_by_mode(mode)
     end
   end
 
   it 'should create item' do
-    AxiomusApi::BaseOrder::ORDER_MODES.each do |mode|
+    ORDER_MODES.each do |mode|
       order = AxiomusApi::BaseOrder.create_by_mode(mode)
       item = order.create_item
 
@@ -26,7 +27,8 @@ end
   AxiomusApi::EmsOrder => AxiomusApi::EmsAddress,
   AxiomusApi::PostOrder => AxiomusApi::PostAddress,
   AxiomusApi::RegionsCourierOrder => AxiomusApi::RegionsCourierAddress,
-  AxiomusApi::RegionsPickupOrder => AxiomusApi::RegionsPickupAddress
+  AxiomusApi::RegionsPickupOrder => AxiomusApi::RegionsPickupAddress,
+  AxiomusApi::DpdOrder => AxiomusApi::DpdAddress
 }.each do |c, a|
   describe c.name do
     it 'should have correct address type' do
@@ -42,7 +44,8 @@ end
   AxiomusApi::PickupOrder => AxiomusApi::Services,
   AxiomusApi::PostOrder => AxiomusApi::PostServices,
   AxiomusApi::RegionsCourierOrder => AxiomusApi::RegionsServices,
-  AxiomusApi::RegionsPickupOrder => AxiomusApi::RegionsServices
+  AxiomusApi::RegionsPickupOrder => AxiomusApi::RegionsServices,
+  AxiomusApi::DpdOrder => AxiomusApi::PostServices
 }.each do |c, a|
   describe c.name do
     it 'should have correct services type' do

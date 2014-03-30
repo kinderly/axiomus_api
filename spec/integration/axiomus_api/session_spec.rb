@@ -78,6 +78,19 @@ describe 'AxiomusApi::Sesion' do
     end
   end
 
+  describe '#new_dpd, #update_dpd' do
+    it 'should create new order and update it' do
+      dpd_order = build(:dpd_order)
+      z = @session.new_dpd(dpd_order)
+      expect(z.code).to eq 0
+      okey = z.okey
+      dpd_order.okey = okey
+      z = @session.update_dpd(dpd_order)
+      expect(z.code).to eq 0
+      z = @session.status(okey)
+    end
+  end
+
   describe '#new_ems, #update_ems' do
     it 'should create new order and update it' do
       ems_order = build(:ems_order)
