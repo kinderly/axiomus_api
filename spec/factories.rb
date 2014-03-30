@@ -1,4 +1,4 @@
-#coding utf-8
+#coding: utf-8
 
 FactoryGirl.define do
   sequence :inner_id do |n|
@@ -43,6 +43,13 @@ FactoryGirl.define do
     big {generate :boolean}
   end
 
+  factory :regions_services, class: AxiomusApi::RegionsServices do
+    cheque {generate :boolean}
+    not_open {generate :boolean}
+    extrapack {generate :boolean}
+    big {generate :boolean}
+  end
+
   factory :base_order, class: AxiomusApi::BaseOrder do
     contacts 'John Galt'
     description 'Awesome description'
@@ -68,6 +75,27 @@ FactoryGirl.define do
     region 'обл Ростовская'
     area 'Ростов-на-Дону'
     p_address 'пер. Соборный, д61, кв21'
+  end
+
+  factory :ems_address, class: AxiomusApi::EmsAddress do
+    index '344018'
+    area 'Ростов-на-Дону'
+    street 'пер Соборный'
+    house '61'
+    apartment '21'
+  end
+
+  factory :regions_courier_address, class: AxiomusApi::RegionsCourierAddress do
+    region_code 33
+    city_code 29
+    index '344018'
+    street 'пер. Соборный'
+    house 61
+    apartment 21
+  end
+
+  factory :regions_pickup_address, class: AxiomusApi::RegionsPickupAddress do
+    office_code 32
   end
 
   factory :delivery_order, class: AxiomusApi::DeliveryOrder, parent: :base_order do
@@ -134,5 +162,26 @@ FactoryGirl.define do
     contacts {generate(:sms)}
   end
 
+  factory :ems_order, class: AxiomusApi::EmsOrder, parent: :base_order do
+    d_date {Time.now + rand(1..10)*24*60*60}
+    address {build(:ems_address)}
+    services {build(:post_services)}
+    contacts {generate(:sms)}
+  end
+
+  factory :regions_order, class: AxiomusApi::RegionsOrder, parent: :base_order do
+    d_date {(Time.now + rand(5..15)*24*60*60).strftime('%Y-%m-%d')}
+    b_time {rand(10..17)}
+    e_time {b_time + 1}
+    services {build(:regions_services)}
+  end
+
+  factory :regions_courier_order, class: AxiomusApi::RegionsCourierOrder, parent: :regions_order do
+    address {build(:regions_courier_address)}
+  end
+
+  factory :regions_pickup_order, class: AxiomusApi::RegionsPickupOrder, parent: :regions_order do
+    address {build(:regions_pickup_address)}
+  end
 
 end

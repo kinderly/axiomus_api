@@ -26,3 +26,4 @@ class AxiomusApi::OrderResponse
     @code == AxiomusApi::ResponseCodes::SUCCESS
   end
 end
+
