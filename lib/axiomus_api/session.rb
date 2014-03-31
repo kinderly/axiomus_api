@@ -64,6 +64,10 @@ class AxiomusApi::Session
     order_response
   end
 
+  def labels_link(orders)
+    "http://axiomus.ru/system/control/_call.php?mode=label&order=#{orders.join(',')}"
+  end
+
   private
 
   def get_order_request(mode, order)

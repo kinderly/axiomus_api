@@ -113,7 +113,7 @@ Most orders use `AxiomusApi::Item` as their item type, but some don't. To safely
 
 ### Error handling
 
-Before sending a request, the library will validate your order object to check for missing fields or wrong type of parameters. If there are errors, it will raise an `AxiomusApi::Errors::ValidationError` exception. List of errors can be accessed via the order's `#validation_errors` method. Please note that passing validation doesn't neccesary means the order will be accepted by Axiomus.
+Before sending a request, the library will validate your order object to check for missing fields or wrong type of parameters. If there are errors, it will raise an `AxiomusApi::Errors::ValidationError` exception. List of errors can be accessed via the order's `#validation_errors` method. Please note that passing validation doesn't necessarily mean the order will be accepted by Axiomus.
 
 If any kind of order request returns with an Axiomus status other than 0, the session will raise an `AxiomusApi::Errors::RequestError` exception.
 
