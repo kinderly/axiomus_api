@@ -159,7 +159,7 @@ FactoryGirl.define do
   end
 
   factory :post_order, class: AxiomusApi::PostOrder, parent: :base_order do
-    d_date {Time.now + rand(1..10)*24*60*60}
+    b_date {Time.now + rand(1..10)*24*60*60}
     post_type {rand(1..2)}
     address {build(:post_address)}
     services {build(:post_services)}
@@ -167,7 +167,7 @@ FactoryGirl.define do
   end
 
   factory :ems_order, class: AxiomusApi::EmsOrder, parent: :base_order do
-    d_date {Time.now + rand(1..10)*24*60*60}
+    b_date {Time.now + rand(1..10)*24*60*60}
     address {build(:ems_address)}
     services {build(:post_services)}
     contacts {generate(:sms)}

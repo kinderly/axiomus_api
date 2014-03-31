@@ -39,7 +39,7 @@ module AxiomusApi::Serializable
   private
 
   def obj_to_xml(xml, obj, xml_name = nil)
-    if obj.respond_to?(:to_xml)
+    if obj.kind_of?(AxiomusApi::Base)
       xml << obj.to_xml(false, xml_name)
     elsif obj.kind_of?(Array)
       xml.send(xml_name) {
