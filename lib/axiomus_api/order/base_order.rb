@@ -5,7 +5,7 @@ class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_element :order
 
   xml_field :contacts, :items
-  xml_field :description
+  xml_field :description, optional: true
   xml_attribute :inner_id, :okey, optional: true
   xml_attribute :name, :places
   xml_field :services, type: AxiomusApi::Services
