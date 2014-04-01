@@ -84,9 +84,9 @@ class AxiomusApi::Session
     logger.info("Request to #{xml_request.mode}")
     logger.debug("Request body: #{xml_request.to_xml}")
     response = connection.request(http_request)
-    response.body.gsub!(/^.*<?xml/, '<?xml')
     logger.info("Response: #{response.code}")
     logger.debug("Response raw: #{response.body}")
+    response.body.gsub!(/^.*<?xml/, '<?xml')
     response
   end
 
