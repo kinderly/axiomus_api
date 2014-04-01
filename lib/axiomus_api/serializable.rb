@@ -6,7 +6,7 @@ module AxiomusApi::Serializable
     attribute_fields = serializable_fields.select{|k,v| v[:xml_type] == :attribute}
 
     attributes = Hash[attribute_fields.map do |k,v|
-      [v[:xml_name] || k, self.send(k).to_s]
+      [v[:xml_name] || k, normalize_axiomus_xml(self.send(k).to_s)]
     end].reject{|k,v| v.nil? || v.empty?}
 
     builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
@@ -29,11 +29,13 @@ module AxiomusApi::Serializable
       }
     end
 
-    if xml_header
+    xml = if xml_header
       builder.to_xml
     else
       builder.doc.root.to_xml
     end
+
+    normalize_axiomus_xml(xml)
   end
 
   private
@@ -47,9 +49,13 @@ module AxiomusApi::Serializable
       }
     else
       xml.send(xml_name) {
-        xml.text(obj.to_s)
+        xml.text(normalize_axiomus_xml(obj.to_s))
       }
     end
+  end
+
+  def normalize_axiomus_xml(str)
+    str.gsub(/&[^;]+;/, '')
   end
 
 end

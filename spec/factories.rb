@@ -14,7 +14,7 @@ FactoryGirl.define do
   end
 
   factory :item, class: AxiomusApi::Item do
-    name {"Product #{rand(1..1000)}"}
+    name {"Product &quot;'\"Awesome\"'&quot; #{rand(1..1000)}"}
     weight {rand(0.1..10.0)}
     quantity {rand(1..10)}
     price {rand(0.5..10000.0)}

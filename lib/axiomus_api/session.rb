@@ -86,7 +86,7 @@ class AxiomusApi::Session
     response = connection.request(http_request)
     logger.info("Response: #{response.code}")
     logger.debug("Response raw: #{response.body}")
-    response.body.gsub!(/^.*<?xml/, '<?xml')
+    response.body.gsub!(/^.*<\?xml/, '<?xml')
     response
   end
 
