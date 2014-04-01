@@ -103,8 +103,8 @@ FactoryGirl.define do
   end
 
   factory :order, class: AxiomusApi::Order, parent: :base_order do
-    trait :incl_delivery_sum do
-      incl_delivery_sum rand(100.0..200.00)
+    trait :incl_deliv_sum do
+      incl_deliv_sum rand(100.0..200.00)
     end
 
     sms {rand(1..2) ? generate(:sms) : nil}
