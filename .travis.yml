@@ -5,6 +5,6 @@ rvm:
 install: "bundle install --path vendor/bundle"
 cache:
   directories:
-  - vendor/bundle
-script: "CODECLIMATE_REPO_TOKEN=93631233647d94015cf8e05386117a48a1a23106c2b990e19c96f0f462992e14 bundle exec rspec"
+    - vendor/bundle
+script: "bundle exec rspec"
 

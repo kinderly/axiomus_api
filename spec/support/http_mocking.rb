@@ -2,10 +2,6 @@ require 'net/http'
 
 module HttpMocking
 
-  def self.clear_response_queue
-    @responses = []
-  end
-
   def self.enqueue_response(response_body, code = '200', msg='OK')
     @responses ||= []
     @responses.push([response_body, code, msg])

@@ -87,6 +87,10 @@ FactoryGirl.define do
 
   factory :dpd_address, class: AxiomusApi::DpdAddress, parent: :ems_address do
     region 'обл Ростовская'
+
+    trait :without_region do
+      region nil
+    end
   end
 
   factory :region_courier_address, class: AxiomusApi::RegionCourierAddress do
@@ -103,10 +107,6 @@ FactoryGirl.define do
   end
 
   factory :order, class: AxiomusApi::Order, parent: :base_order do
-    trait :incl_deliv_sum do
-      incl_deliv_sum rand(100.0..200.00)
-    end
-
     sms {rand(1..2) ? generate(:sms) : nil}
     d_date {Time.now + rand(1..10)*24*60*60}
     b_time {rand(10..19)}
@@ -115,6 +115,14 @@ FactoryGirl.define do
     city 0
     garden_ring {generate :boolean}
     from_mkad {rand(1..2) == 2 && garden_ring !='yes' && city > 0 ? rand(1..40) : nil}
+
+    trait :incl_deliv_sum do
+      incl_deliv_sum rand(100.0..200.00)
+    end
+
+    trait :with_empty_address do
+      address ''
+    end
   end
 
   factory :carry_order, class: AxiomusApi::CarryOrder, parent: :base_order do
@@ -164,6 +172,10 @@ FactoryGirl.define do
     address {build(:post_address)}
     services {build(:post_services)}
     contacts {generate(:sms)}
+
+    trait :with_region_services do
+      services {build(:region_services)}
+    end
   end
 
   factory :ems_order, class: AxiomusApi::EmsOrder, parent: :base_order do
@@ -195,6 +207,10 @@ FactoryGirl.define do
     d_date {(Time.now + rand(5..15)*24*60*60).strftime('%Y-%m-%d')}
     b_time {rand(10..17)}
     e_time {b_time + 1}
+
+    trait :without_address do
+      address nil
+    end
   end
 
 end

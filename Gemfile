@@ -4,7 +4,6 @@ gemspec
 
 group :test do
   gem 'rspec'
-  gem 'coveralls'
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'coveralls', require: false
   gem 'factory_girl', '~> 4.0'
 end

@@ -2,3 +2,4 @@
 *.sublime*
 /vendor/bundle
 /coverage
+.coveralls.yml
