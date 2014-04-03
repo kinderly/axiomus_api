@@ -1,4 +1,4 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
 describe 'AxiomusApi::BaseOrder' do
 
@@ -11,9 +11,11 @@ describe 'AxiomusApi::BaseOrder' do
   it 'should create item' do
     ORDER_MODES.each do |mode|
       order = AxiomusApi::BaseOrder.create_by_mode(mode)
-      item = order.create_item
+      item = order.items.add_item
+      item.quantity = 21
+      expect(order.items.item.first.quantity).to eq(21)
 
-      if [:new_export, :update_export].include?(mode)
+      if [:new_export, :update_export, :new_self_export, :update_self_export].include?(mode)
         expect(item.is_a?(AxiomusApi::ExportItem)).to be_true
       else
         expect(item.is_a?(AxiomusApi::Item)).to be_true

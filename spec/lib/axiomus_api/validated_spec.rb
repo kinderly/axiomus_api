@@ -33,4 +33,40 @@ describe 'AxiomusApi::Validated' do
     expect(order.validation_errors).to have(0).items
   end
 
+  it 'should validate array items' do
+    order = build(:order)
+    order.delivset = AxiomusApi::Delivset.new
+    order.delivset.below = 'Some arbitrary string'
+    order.delivset.return_price = 12
+    order.delivset.above_sum = 12
+    order.delivset.above_price = 12
+    expect(order).not_to be_valid
+    expect(order.validation_errors).to have(1).items
+  end
+
+  it 'should validate max occurs' do
+    order = build(:order)
+    order.delivset = AxiomusApi::Delivset.new
+    order.delivset.return_price = 12
+    order.delivset.above_sum = 12
+    order.delivset.above_price = 12
+
+    4.times do
+      order.delivset.below << build(:below)
+    end
+
+    expect(order).not_to be_valid
+    expect(order.validation_errors).to have(1).items
+  end
+
+  it 'should validate optional arrays' do
+    order = build(:order)
+    order.delivset = AxiomusApi::Delivset.new
+    order.delivset.return_price = 12
+    order.delivset.above_sum = 12
+    order.delivset.above_price = 12
+    order.delivset.below = []
+    expect(order).to be_valid
+  end
+
 end

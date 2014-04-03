@@ -1,4 +1,4 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
 describe 'AxiomusApi::Sesion' do
   before(:all) do
@@ -24,11 +24,33 @@ describe 'AxiomusApi::Sesion' do
       expect(z.code).to eq 0
       z = @session.status(okey)
     end
+
+    it 'should support #delivset field' do
+      order = build(:order, :with_delivset)
+      z = @session.new(order)
+      expect(z.code).to eq 0
+      okey = z.okey
+      order.okey = okey
+      z = @session.update(order)
+      expect(z.code).to eq 0
+      z = @session.status(okey)
+    end
   end
 
   describe '#new_carry, #update_carry' do
     it 'should create new order and update it' do
       carry_order = build(:carry_order)
+      z = @session.new_carry(carry_order)
+      expect(z.code).to eq 0
+      okey = z.okey
+      carry_order.okey = okey
+      z = @session.update_carry(carry_order)
+      expect(z.code).to eq 0
+      z = @session.status(okey)
+    end
+
+    it 'should support #delivset field' do
+      carry_order = build(:carry_order, :with_delivset)
       z = @session.new_carry(carry_order)
       expect(z.code).to eq 0
       okey = z.okey

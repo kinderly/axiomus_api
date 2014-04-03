@@ -13,6 +13,23 @@ FactoryGirl.define do
     ['yes', 'no'][rand(0..1)]
   end
 
+  factory :below, class: AxiomusApi::Below do
+    below_sum { rand(0.0..300.0)}
+    price { rand(100.0..500.0)}
+  end
+
+  factory :delivset, class: AxiomusApi::Delivset do
+    return_price {rand(100.0..300.0)}
+    above_sum {rand(100.0..1000.0)}
+    above_price {rand(100.0..1000.0)}
+
+    after(:build) do |ds|
+      rand(1..3).times do
+        ds.below << build(:below)
+      end
+    end
+  end
+
   factory :item, class: AxiomusApi::Item do
     name {"Product &quot;'\"Awesome\"'&quot; #{rand(1..1000)}"}
     weight {rand(0.1..10.0)}
@@ -22,6 +39,18 @@ FactoryGirl.define do
 
   factory :export_item, class: AxiomusApi::ExportItem, parent: :item do
     oid {rand(10000..99999)}
+  end
+
+  factory :items, class: AxiomusApi::Items do
+    after(:build) do |items|
+      items.item << build(:item)
+    end
+  end
+
+  factory :export_items, class: AxiomusApi::ExportItems do
+    after(:build) do |items|
+      items.item << build(:export_item)
+    end
   end
 
   factory :services, class: AxiomusApi::Services do
@@ -63,11 +92,7 @@ FactoryGirl.define do
     places {rand(1..2)}
     services {build(:services)}
 
-    after(:build) do |order|
-      rand(1..10).times do
-        order.items << build(:item)
-      end
-    end
+    items {build(:items)}
   end
 
   factory :post_address, class: AxiomusApi::PostAddress do
@@ -115,6 +140,7 @@ FactoryGirl.define do
     city 0
     garden_ring {generate :boolean}
     from_mkad {rand(1..2) == 2 && garden_ring !='yes' && city > 0 ? rand(1..40) : nil}
+    delivset nil
 
     trait :incl_deliv_sum do
       incl_deliv_sum rand(100.0..200.00)
@@ -123,6 +149,10 @@ FactoryGirl.define do
     trait :with_empty_address do
       address ''
     end
+
+    trait :with_delivset do
+      delivset {build(:delivset)}
+    end
   end
 
   factory :carry_order, class: AxiomusApi::CarryOrder, parent: :base_order do
@@ -130,6 +160,11 @@ FactoryGirl.define do
     office {[0, 1, nil][rand(0..2)]}
     b_date {Time.now + rand(5..10)*24*60*60}
     e_date {b_date + 7*24*60*60}
+    delivset nil
+
+    trait :with_delivset do
+      delivset {build(:delivset)}
+    end
   end
 
   factory :export_order, class: AxiomusApi::ExportOrder, parent: :base_order do
@@ -142,13 +177,7 @@ FactoryGirl.define do
     address 'Москва, Живописная, д4 корп1, кв 16'
     garden_ring {generate :boolean}
     from_mkad {garden_ring == 'yes' ? nil : rand(1..40)}
-
-    after(:build) do |order|
-      order.items = []
-      rand(1..10).times do
-        order.items << build(:export_item)
-      end
-    end
+    items {build(:export_items)}
   end
 
   factory :self_export_order, class: AxiomusApi::SelfExportOrder, parent: :base_order do
@@ -157,13 +186,7 @@ FactoryGirl.define do
     b_time {rand(10..19)}
     e_time {b_time + 3}
     quantity {rand(1..3)}
-
-    after(:build) do |order|
-      order.items = []
-      rand(1..10).times do
-        order.items << build(:export_item)
-      end
-    end
+    items {build(:export_items)}
   end
 
   factory :post_order, class: AxiomusApi::PostOrder, parent: :base_order do

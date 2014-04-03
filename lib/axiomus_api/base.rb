@@ -13,7 +13,7 @@ class AxiomusApi::Base
     options = extract_options(args)
 
     options.keys.each do |k|
-      raise "Wrong attribute #{k}" if ![:xml_type, :xml_name, :optional, :type].include?(k)
+      raise "Wrong attribute #{k}" if ![:xml_type, :xml_name, :optional, :type, :array, :max_occurs].include?(k)
     end
 
     args.each do |attr_name|
@@ -27,6 +27,10 @@ class AxiomusApi::Base
     options = extract_options(args)
     args << options.merge({xml_type: :attribute})
     xml_field(*args)
+  end
+
+  def self.xml_field_array(name, options = {})
+    xml_field(name, options.merge({array: true}))
   end
 
   def self.attribute_meta
@@ -60,7 +64,9 @@ class AxiomusApi::Base
 
   def initialize
     self.class.attribute_meta.each do |k, v|
-      if v[:type]
+      if v[:array]
+        self.send("#{k}=".to_sym, [])
+      elsif v[:type]
         self.send("#{k}=".to_sym, v[:type].new)
       end
     end

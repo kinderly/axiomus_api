@@ -96,13 +96,14 @@ You can also specify the Axiomus method as a symbol, using `AxiomusApi::Session#
   @response =  @session.send_order_request(:update_ems, @order)
 ```
 
-Most orders use `AxiomusApi::Item` as their item type, but some don't. To safely create an item of a proper type, use `#create_item` method of your order object:
+Most orders use `AxiomusApi::Item` as their item type, but some don't. To safely create an item of a proper type, use `#add_item` method of your order's `#items` field:
 
 ```ruby
   @order = AxiomusApi::EmsOrder.new
-  @my_item = @order.create_item
-  # set item properties
-  @order.items << @my_item
+  @my_item = @order.items.add_item
+  @my_item.name = 'My awesome product'
+  @my_item.weight = 0.3
+  # set other fields
 ```
 
 ### Getting order status

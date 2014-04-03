@@ -1,30 +1,23 @@
 require_relative '../base'
 require_relative '../services/services'
+require_relative '../items/items'
 
 class AxiomusApi::BaseOrder < AxiomusApi::Base
   xml_element :order
 
-  xml_field :contacts, :items
+  xml_field :contacts
+  xml_field :items, type: AxiomusApi::Items
   xml_field :description, optional: true
   xml_attribute :inner_id, :okey, optional: true
   xml_attribute :name, :places
   xml_field :services, type: AxiomusApi::Services
 
-  def initialize
-    super
-    @items = []
-  end
-
   def total_quantity
-    @items.inject(0){|sum, it| sum + it.quantity}
+    @items.item.inject(0){|sum, it| sum + it.quantity}
   end
 
   def checksum(uid)
-    Digest::MD5.hexdigest("#{uid}u#{@items.count}#{total_quantity}")
-  end
-
-  def create_item
-    AxiomusApi::Item.new
+    Digest::MD5.hexdigest("#{uid}u#{@items.item.count}#{total_quantity}")
   end
 
   def self.create_by_mode(mode)
