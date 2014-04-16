@@ -6,4 +6,5 @@ group :test do
   gem 'rspec'
   gem 'coveralls', require: false
   gem 'factory_girl', '~> 4.0'
+  gem 'faker'
 end

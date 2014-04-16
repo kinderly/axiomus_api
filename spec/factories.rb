@@ -1,4 +1,5 @@
 #coding: utf-8
+require('faker')
 
 FactoryGirl.define do
   sequence :inner_id do |n|
@@ -234,6 +235,21 @@ FactoryGirl.define do
     trait :without_address do
       address nil
     end
+  end
+
+  factory :label, class: AxiomusApi::Label do
+    dispatch_number {rand(2300000..2400000)}
+    order_id {rand(20000..60000)}
+    client_name {Faker::Company.name}
+    weight {rand(0.1..10.0)}
+    date {(Time.now + rand(1..10)*24*60*60)}
+    b_time {rand(10..17)}
+    e_time {b_time + 1}
+    places {rand(1..3)}
+    place {rand(1..places)}
+    address {"#{Faker::Address.postcode} #{Faker::Address.city}, #{Faker::Address.street_address}"}
+    type {['Д', 'C', 'Р'][rand(0..2)]}
+    city {['Мск', 'Спб'][rand(0..1)]}
   end
 
 end

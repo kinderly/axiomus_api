@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Ярлыки Axiomus</title>
+  <meta charset="utf-8"/>
+  <style type="text/css" media="all">
+  body {padding: 0; margin: 0; width: 200mm; font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif; font-weight: bold;}
+        @page {margin: 0;}
+        div {float: left; overflow: hidden;}
+        .label {height: 55.3mm; width: 98mm;/*этикетка размером 59.4x105mm 10шт*/border: 1px solid #000;}
+        .bb { margin: 4mm 2mm;}
+        .d1 {height: 17mm; width: 57mm; padding-left: 3mm;}
+
+        .d1n {height: 8mm; width: 57mm; font-size: 23pt; }
+        .d2n {height: 4mm; width: 53mm; text-align:right;font: normal 9pt Arial, Times, Georgia, serif !important;}       /*53mm !*/
+        .d1cu {height: 4mm; width: 57mm; }
+
+        .d2 {height: 16mm; width: 30.5mm; font-weight: normal; font-size: 18pt; text-align: right; line-height: 23pt;}
+        .d3 {height: 10mm; width: 88mm; font: normal 12pt Times, Georgia, serif; text-align: right;}
+        .d3-2 {height: 10mm; width: 88mm; font: normal 12pt Times, Georgia, serif;}
+
+        .d2, .d3-2, .d8-2, .d8 {border-bottom: 0.5mm solid #777;}
+        .d3, .d3-2, .d8-1, .d8-2 {color: #555;}
+        .cu {font: normal 10pt Arial, Times, Georgia, serif; line-height: 10pt;}
+        .cnum {text-align:right;font: normal 10pt Arial, Times, Georgia, serif !important;}
+        .con {font: normal 13pt Times, Georgia, serif;}
+        .time {font-weight: normal; font-size: 14pt;}
+
+        .d4 {height: 12mm; width: 32mm;}
+        .d5 {height: 12mm; width: 19mm; font-size: 14pt;}
+        .d6 {height: 12mm; width: 16mm; font-size: 16pt;}
+        .d7 {height: 12mm; width: 28mm; font-size: 25pt;}
+        .d1, .d4, .d5, .d6, .d8 {border-right: 0.5mm solid #777;}
+        .d4, .d5, .d6, .d7 {text-align: center; line-height: 40pt;}
+
+        .d8-1 {height: 10mm; width: 65mm; font: normal 12pt Times, Georgia, serif; text-align: right;}
+        .d8-2 {padding:0 0 0 3;height: 10mm; width: 65mm; font: normal 11pt Times, Georgia, serif;}
+        .d8 {height: 16mm;width: 22.5mm;  line-height: 23pt;font-weight: normal; font-size: 21pt;text-align: center;padding-top: 4mm;}
+        .d9 {height: 9mm; width:24.5mm; font-weight: normal; font-size: 21pt;text-align: center;padding-top: 3mm;border-right: 0.5mm solid #777;}
+        .d10 {height: 20mm;width: 60mm; border-right: 0.5mm solid #777; border-bottom: 0.5mm solid #777; text-align:center;}
+        .d11 {height: 20mm; width: 30mm; font: normal 10pt Arial, Georgia, serif; text-align: right;border-bottom: 0.5mm solid #777;}
+
+        #bundl {font: bold 20pt Arial, Tahoma, Verdana, Helvetica, sans-serif; line-height: 40pt;}
+
+
+        #close { text-align: center; display: block; width: 150px; font: bold 16px Arial, Tahoma, Verdana, Helvetica, sans-serif; color: #036; border: 2px solid #eee; padding: 3px 10px 3px 3px; background: #FFEAEA; text-decoration: none; margin-top: 10px;}
+  #close:hover {color: #777; background: #eee;}
+  #close img {padding: 0; margin: 3px 7px; vertical-align: middle; border: none;}
+
+
+        @media print {
+    #close {display: none;}
+                .page_brake {page-break-before: always; padding: 0px; margin: 0px;}
+  </style>
+  </head>
+  <body>
+    <% @labels.each do |label| %>
+      <div class="label">
+        <div class="bb">
+          <div class="d1">
+            <div class="d1n"><%= label.dispatch_number_formatted %></div>
+            <div class="d2n">(<%= label.order_id %>)</div>
+            <div class="d1cu">
+              <span class="cu"><%= label.client_name %></span>
+            </div>
+          </div>
+          <div class="d2">
+            <b><%= label.date.strftime('%d.%m.%y') %></b>
+            <br/>
+            <span class="time"><%= label.b_time %>-<%= label.e_time %></span>
+          </div>
+          <div class="d10">
+            <img src='<%= label.barcode_base64 %>'/>
+          </div>
+          <div class="d11"><%= label.address %></div>
+          <div class="d9"><b><i><%= label.weight.round(1) %></i></b><span class="cu"> кг</span></div>
+          <div class="d5"><%= label.type %></div>
+          <div class="d6"><%= label.city %></div>
+          <div class="d7"><%= label.place %>/<%= label.places %></div>
+        </div>
+      </div>
+    <% end %>
+  </body>
+</html>
