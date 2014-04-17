@@ -2,6 +2,8 @@ require 'net/http'
 require_relative 'actions'
 require_relative 'response/regions_response'
 require_relative 'response/status_response'
+require_relative 'response/status_list_response'
+require_relative 'response/version_response'
 require_relative 'response/order_response'
 
 class AxiomusApi::Session
@@ -45,6 +47,23 @@ class AxiomusApi::Session
     status_response
   end
 
+  def status_list(okeys)
+    xml_request = create_request(:status_list)
+    xml_request.auth = nil
+    xml_request.okeys = okeys
+    response = send_request(xml_request)
+    status_response = AxiomusApi::StatusListResponse.new(response.body)
+    status_response
+  end
+
+  def get_version
+    xml_request = create_request(:get_version)
+    xml_request.auth = nil
+    response = send_request(xml_request)
+    version_response = AxiomusApi::VersionResponse.new(response.body)
+    version_response.version
+  end
+
   def send_order_request(mode, order)
     if(!order.valid?)
       error_msg = order.validation_errors.join('\n')
@@ -82,7 +101,7 @@ class AxiomusApi::Session
     connection = Net::HTTP.new(AxiomusApi::AXIOMUS_HOST, AxiomusApi::AXIOMUS_PORT)
     http_request = get_http_request(xml_request)
     logger.info("Request to #{xml_request.mode}")
-    logger.debug("Request body: #{xml_request.to_xml}")
+    logger.debug("Request body: #{xml_request.to_xml(true)}")
     response = connection.request(http_request)
     logger.info("Response: #{response.code}")
     logger.debug("Response raw: #{response.body}")

@@ -46,6 +46,21 @@ describe 'AxiomusApi::Session' do
     end
   end
 
+  describe '#status_list' do
+    it 'should handle successfull request' do
+      HttpMocking.enqueue_response(DummyData::STATUS_LIST_SUCCESS_RESPONSE)
+      z = @session.status_list(['7bbf66349060b723bba20ef687ee4ebf', 'f2c2635a00310d39cf26b7cc1db6fab2'])
+    end
+  end
+
+  describe '#get_version' do
+    it 'should handle successfull request' do
+      HttpMocking.enqueue_response(DummyData::GET_VERSION_SUCCESS_RESPONSE)
+      z = @session.get_version
+      expect(z).to eq('2.12')
+    end
+  end
+
   it 'should accept a block' do
     HttpMocking.enqueue_response(DummyData::REGIONS_SUCCESS_RESPONSE)
     res = nil

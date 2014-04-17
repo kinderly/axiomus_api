@@ -58,4 +58,32 @@ module DummyData
     </response>
   XML
 
+  STATUS_LIST_SUCCESS_RESPONSE = <<-XML
+  <?xml version="1.0" encoding="utf-8" ?>
+  <response>
+  <request>status_list</request>
+  <okeylist>
+    <okey id="1180901"
+          status_code="100"
+          status_name="выполнен"
+          inner_id="Заказ #878"
+          price="406.02"
+          customer_price="430.00">7bbf66349060b723bba20ef687ee4ebf</okey>
+    <okey id="1991064"
+          status_code="100"
+          status_name="выполнен"
+          inner_id="" price="0.00"
+          customer_price="">f2c2635a00310d39cf26b7cc1db6fab2</okey>
+  </okeylist>
+  </response>
+  XML
+
+  GET_VERSION_SUCCESS_RESPONSE = <<-XML
+  <?xml version="1.0" encoding="utf-8" ?>
+  <response>
+    <request>get_version</request>
+    <version>2.12</version>
+  </response>
+  XML
+
 end

@@ -3,3 +3,4 @@
 /vendor/bundle
 /coverage
 .coveralls.yml
+/*.gem

@@ -81,10 +81,11 @@ FactoryGirl.define do
   end
 
   factory :base_order, class: AxiomusApi::BaseOrder do
-    contacts 'John Galt'
+    name {Faker::Name.name}
+    contacts {name}
     description 'Awesome description'
     inner_id {rand(1..2)==2 ? generate(:inner_id) : nil}
-    name 'John Galt'
+
 
     trait :has_okey do
       okey '2e3023c3e78f4f0c8cbb81257743c2d7'

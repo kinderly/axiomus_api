@@ -13,6 +13,24 @@ describe 'AxiomusApi::Sesion' do
     end
   end
 
+  # describe '#status_list' do
+  #   it 'should handle multiple okeys' do
+  #     order = build(:order)
+  #     z1 = @session.new(order)
+  #     order = build(:order)
+  #     z2 = @session.new(order)
+  #     r = @session.status_list([z1.okey, z2.okey])
+  #     puts r
+  #   end
+  # end
+
+  # describe '#get_version' do
+  #   it 'should return version' do
+  #     version = @session.get_version
+  #     puts version
+  #   end
+  # end
+
   describe '#new, #update' do
     it 'should create new order and update it' do
       order = build(:order)

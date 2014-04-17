@@ -1,6 +1,7 @@
 require 'logger'
 
 module AxiomusApi
+  AXIOMUS_API_VERSION = '2.12'
   AXIOMUS_PROD_PATH = '/hydra/api_xml.php'
   AXIOMUS_TEST_PATH = '/test/api_xml_test.php'
   AXIOMUS_HOST = 'axiomus.ru'
