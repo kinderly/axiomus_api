@@ -22,6 +22,14 @@ class AxiomusApi::Label
     dispatch_number.to_s.gsub(/(....)$/, '`\1')
   end
 
+  def delivery_time
+    if b_time.nil? || e_time.nil?
+      nil
+    else
+      "#{b_time}-#{e_time}"
+    end
+  end
+
   def barcode_raw(height = 70)
     barcode = Barby::Code39.new("#{dispatch_number}+#{place}")
     barcode.wide_width = 3
