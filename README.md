@@ -112,6 +112,35 @@ Most orders use `AxiomusApi::Item` as their item type, but some don't. To safely
   @status = @session.status(@okey)
 ```
 
+### Rendering labels locally
+You can render Axiomus labels in your own layout. The labels are rendered in HTML format.
+```ruby
+label = AxiomusApi::Label.new
+label.dispatch_number = '213123123123'
+label.order_id = '12345'
+label.client_name = 'John Doe'
+label.weight = 0.3
+label.date =
+label.b_time = 10
+label.e_time = 14
+label.place = 1
+label.places = 3
+label.address = '344000 Ростов-на-Дону, ул. Б. Садовая 23'
+label.type = 'P'
+label.city = 'ПР'
+html = AxiomusApi::Label.render(label)
+```
+
+You can also render several labels on one page:
+```ruby
+html = AxiomusApi::Label.render([label1, label2, label3])
+```
+
+There's a built-in ERB template for rendering labels, but you can also provide your own:
+```ruby
+html = AxiomusApi::Label.render(label, my_erb_string)
+```
+
 ### Error handling
 
 Before sending a request, the library will validate your order object to check for missing fields or wrong type of parameters. If there are errors, it will raise an `AxiomusApi::Errors::ValidationError` exception. List of errors can be accessed via the order's `#validation_errors` method. Please note that passing validation doesn't necessarily mean the order will be accepted by Axiomus.
