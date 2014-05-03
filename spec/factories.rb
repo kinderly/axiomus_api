@@ -78,6 +78,7 @@ FactoryGirl.define do
     not_open {generate :boolean}
     extrapack {generate :boolean}
     big {generate :boolean}
+    part_return {generate :boolean}
   end
 
   factory :base_order, class: AxiomusApi::BaseOrder do
