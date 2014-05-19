@@ -13,23 +13,25 @@ describe 'AxiomusApi::Sesion' do
     end
   end
 
-  # describe '#status_list' do
-  #   it 'should handle multiple okeys' do
-  #     order = build(:order)
-  #     z1 = @session.new(order)
-  #     order = build(:order)
-  #     z2 = @session.new(order)
-  #     r = @session.status_list([z1.okey, z2.okey])
-  #     puts r
-  #   end
-  # end
+  describe '#status_list' do
+    it 'should handle multiple okeys' do
+      expect do
+        order = build(:order)
+        z1 = @session.new(order)
+        order = build(:order)
+        z2 = @session.new(order)
+        r = @session.status_list([z1.okey, z2.okey])
+      end.not_to raise_error
+    end
+  end
 
-  # describe '#get_version' do
-  #   it 'should return version' do
-  #     version = @session.get_version
-  #     puts version
-  #   end
-  # end
+  describe '#get_version' do
+    it 'should return version' do
+      expect do
+        version = @session.get_version
+      end.not_to raise_error
+    end
+  end
 
   describe '#new, #update' do
     it 'should create new order and update it' do
@@ -131,18 +133,18 @@ describe 'AxiomusApi::Sesion' do
     end
   end
 
-  describe '#new_ems, #update_ems' do
-    it 'should create new order and update it' do
-      ems_order = build(:ems_order)
-      z = @session.new_ems(ems_order)
-      expect(z.code).to eq 0
-      okey = z.okey
-      ems_order.okey = okey
-      z = @session.update_ems(ems_order)
-      expect(z.code).to eq 0
-      z = @session.status(okey)
-    end
-  end
+  # describe '#new_ems, #update_ems' do
+  #   it 'should create new order and update it' do
+  #     ems_order = build(:ems_order)
+  #     z = @session.new_ems(ems_order)
+  #     expect(z.code).to eq 0
+  #     okey = z.okey
+  #     ems_order.okey = okey
+  #     z = @session.update_ems(ems_order)
+  #     expect(z.code).to eq 0
+  #     z = @session.status(okey)
+  #   end
+  # end
 
   describe '#new_region_courier, #update_region_courier' do
     it 'should create new order and update it' do

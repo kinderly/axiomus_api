@@ -71,6 +71,25 @@ FactoryGirl.define do
     fragile {generate :boolean}
     cod {generate :boolean}
     big {generate :boolean}
+    class1 {generate :boolean}
+    post_tarif {generate :boolean}
+    not_avia {generate :boolean}
+    optimize {generate :boolean}
+  end
+
+  factory :dpd_services, class: AxiomusApi::DpdServices do
+    valuation {generate :boolean}
+    fragile {generate :boolean}
+    cod {generate :boolean}
+    big {generate :boolean}
+    waiting {generate :boolean}
+  end
+
+  factory :ems_services, class: AxiomusApi::EmsServices do
+    valuation {generate :boolean}
+    fragile {generate :boolean}
+    cod {generate :boolean}
+    big {generate :boolean}
   end
 
   factory :region_services, class: AxiomusApi::RegionServices do
@@ -185,7 +204,7 @@ FactoryGirl.define do
 
   factory :self_export_order, class: AxiomusApi::SelfExportOrder, parent: :base_order do
     car 'с065мк61'
-    d_date {Time.now + rand(1..10)*24*60*60}
+    d_date {(Time.now + rand(1..10)*24*60*60).strftime('%Y-%m-%d')}
     b_time {rand(10..19)}
     e_time {b_time + 3}
     quantity {rand(1..3)}
@@ -193,7 +212,7 @@ FactoryGirl.define do
   end
 
   factory :post_order, class: AxiomusApi::PostOrder, parent: :base_order do
-    b_date {Time.now + rand(1..10)*24*60*60}
+    b_date {(Time.now + rand(1..10)*24*60*60).strftime('%Y-%m-%d')}
     post_type {rand(1..2)}
     address {build(:post_address)}
     services {build(:post_services)}
@@ -207,7 +226,7 @@ FactoryGirl.define do
   factory :ems_order, class: AxiomusApi::EmsOrder, parent: :base_order do
     b_date {Time.now + rand(1..10)*24*60*60}
     address {build(:ems_address)}
-    services {build(:post_services)}
+    services {build(:ems_services)}
     contacts {generate(:sms)}
   end
 
@@ -228,9 +247,9 @@ FactoryGirl.define do
 
   factory :dpd_order, class: AxiomusApi::DpdOrder, parent: :base_order do
     post_type {rand(1..2)}
-    services {build(:post_services)}
+    services {build(:dpd_services)}
     address {build(:dpd_address)}
-    d_date {(Time.now + rand(5..15)*24*60*60).strftime('%Y-%m-%d')}
+    b_date {(Time.now + rand(5..15)*24*60*60).strftime('%Y-%m-%d')}
     b_time {rand(10..17)}
     e_time {b_time + 1}
 

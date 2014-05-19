@@ -41,13 +41,13 @@ end
 
 {
   AxiomusApi::Order => AxiomusApi::Services,
-  AxiomusApi::EmsOrder => AxiomusApi::PostServices,
+  AxiomusApi::EmsOrder => AxiomusApi::EmsServices,
   AxiomusApi::ExportOrder => AxiomusApi::ExportServices,
   AxiomusApi::CarryOrder => AxiomusApi::Services,
   AxiomusApi::PostOrder => AxiomusApi::PostServices,
   AxiomusApi::RegionCourierOrder => AxiomusApi::RegionServices,
   AxiomusApi::RegionPickupOrder => AxiomusApi::RegionServices,
-  AxiomusApi::DpdOrder => AxiomusApi::PostServices
+  AxiomusApi::DpdOrder => AxiomusApi::DpdServices
 }.each do |c, a|
   describe c.name do
     it 'should have correct services type' do

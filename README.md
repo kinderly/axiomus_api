@@ -10,7 +10,7 @@
 
 This is a Ruby wrapper over [Axiomus](http://www.axiomus.ru "axiomus.ru") delivery service public [API](http://www.axiomus.ru/customers/api/ "Axiomus API").
 
-All methods exposed by the API v. 2.13 are implemented.
+All methods exposed by the API v. 2.14 are implemented.
 
 ## Installation
 
