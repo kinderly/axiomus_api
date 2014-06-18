@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe 'AxiomusApi::Serializable' do
+describe AxiomusApi::Serializable do
 
   it 'should serialize value as text node' do
 

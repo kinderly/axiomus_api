@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe 'AxiomusApi::Validated' do
+describe AxiomusApi::Validated do
 
   it 'should validate required fields' do
     address = build(:dpd_address, :without_region)

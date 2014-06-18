@@ -1,16 +1,16 @@
 require_relative '../../../spec_helper'
 
-describe 'AxiomusApi::BaseOrder' do
+describe AxiomusApi::BaseOrder do
 
   it 'should build order by mode' do
     ORDER_MODES.each do |mode|
-      order = AxiomusApi::BaseOrder.create_by_mode(mode)
+      order = described_class.create_by_mode(mode)
     end
   end
 
   it 'should create item' do
     ORDER_MODES.each do |mode|
-      order = AxiomusApi::BaseOrder.create_by_mode(mode)
+      order = described_class.create_by_mode(mode)
       item = order.items.add_item
       item.quantity = 21
       expect(order.items.item.first.quantity).to eq(21)

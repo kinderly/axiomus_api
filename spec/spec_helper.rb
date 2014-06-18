@@ -5,6 +5,7 @@ require 'factory_girl'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.mock_with :rspec
 end
 
 ORDER_MODES = [:new, :update, :new_carry, :update_carry, :new_export, :update_export,
@@ -24,5 +25,4 @@ end
 
 require_relative '../lib/axiomus_api.rb'
 require_relative 'support/dummy_data.rb'
-require_relative 'support/http_mocking.rb'
 require_relative 'factories.rb'
