@@ -16,9 +16,9 @@ describe 'AxiomusApi::BaseOrder' do
       expect(order.items.item.first.quantity).to eq(21)
 
       if [:new_export, :update_export, :new_self_export, :update_self_export].include?(mode)
-        expect(item.is_a?(AxiomusApi::ExportItem)).to be_true
+        expect(item.is_a?(AxiomusApi::ExportItem)).to be_truthy
       else
-        expect(item.is_a?(AxiomusApi::Item)).to be_true
+        expect(item.is_a?(AxiomusApi::Item)).to be_truthy
       end
     end
   end

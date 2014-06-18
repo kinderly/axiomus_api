@@ -1,6 +1,6 @@
 require 'coveralls'
 Coveralls.wear!
-
+require 'rspec/collection_matchers'
 require 'factory_girl'
 
 RSpec.configure do |config|
