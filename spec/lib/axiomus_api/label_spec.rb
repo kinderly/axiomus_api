@@ -15,4 +15,10 @@ describe AxiomusApi::Label do
     @labels = (1..10).map{build(:label)}
     expect{html = described_class.render(@labels)}.not_to raise_error
   end
+
+  it 'renders label without places' do
+    @label = build(:label_without_places)
+    expect{html = described_class.render(@label)}.not_to raise_error
+  end
+
 end

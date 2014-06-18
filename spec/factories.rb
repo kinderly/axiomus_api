@@ -273,4 +273,9 @@ FactoryGirl.define do
     city {['Мск', 'СПб'][rand(0..1)]}
   end
 
+  factory :label_without_places, parent: :label do
+    place nil
+    places nil
+  end
+
 end

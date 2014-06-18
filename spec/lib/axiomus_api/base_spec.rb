@@ -11,16 +11,13 @@ describe AxiomusApi::Base do
   end
 
   it 'should raise if no tag name' do
-
     class C < described_class
       xml_field :value
     end
 
     c = C.new
     c.value = '32'
-
     expect{c.tag_name}.to raise_error
-
   end
 
 end

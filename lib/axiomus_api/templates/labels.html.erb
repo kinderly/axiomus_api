@@ -76,7 +76,11 @@
           <div class="d9"><b><i><%= label.weight.round(1) %></i></b><span class="cu"> кг</span></div>
           <div class="d5"><%= label.type %></div>
           <div class="d6"><%= label.city %></div>
-          <div class="d7"><%= label.place %>/<%= label.places %></div>
+          <div class="d7">
+            <% if label.place && label.places %>
+              <%= label.place %>/<%= label.places %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
