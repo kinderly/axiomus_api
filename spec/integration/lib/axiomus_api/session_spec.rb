@@ -1,6 +1,6 @@
 require_relative '../../../spec_helper'
 
-describe 'AxiomusApi::Sesion' do
+describe AxiomusApi::Session do
   before(:all) do
     AxiomusApi.logger.level = Logger::INFO
     @session = AxiomusApi.test_session
@@ -9,7 +9,7 @@ describe 'AxiomusApi::Sesion' do
   describe '#get_regions' do
     it 'should handle successfull request' do
       z = @session.get_regions()
-      expect(z.regions.count > 0).to be_true
+      expect(z.regions.count > 0).to be_truthy
     end
   end
 
