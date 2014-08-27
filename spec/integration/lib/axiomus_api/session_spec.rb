@@ -45,6 +45,18 @@ describe AxiomusApi::Session do
       z = @session.status(okey)
     end
 
+    it 'should create new return order and update it' do
+      order = build(:return_order)
+      puts order.to_xml
+      z = @session.new(order)
+      expect(z.code).to eq 0
+      okey = z.okey
+      order.okey = okey
+      z = @session.update(order)
+      expect(z.code).to eq 0
+      z = @session.status(okey)
+    end
+
     it 'should support #delivset field' do
       order = build(:order, :with_delivset)
       z = @session.new(order)

@@ -36,6 +36,10 @@ FactoryGirl.define do
     weight {rand(0.1..10.0)}
     quantity {rand(1..10)}
     price {rand(0.5..10000.0)}
+
+    factory :return_item do
+      expmode 1
+    end
   end
 
   factory :export_item, class: AxiomusApi::ExportItem, parent: :item do
@@ -45,6 +49,12 @@ FactoryGirl.define do
   factory :items, class: AxiomusApi::Items do
     after(:build) do |items|
       items.item << build(:item)
+    end
+  end
+
+  factory :return_items, class: AxiomusApi::Items do
+    after(:build) do |items|
+      items.item << build(:return_item)
     end
   end
 
@@ -174,6 +184,10 @@ FactoryGirl.define do
 
     trait :with_delivset do
       delivset {build(:delivset)}
+    end
+
+    factory :return_order do
+      items {build(:return_items)}
     end
   end
 
