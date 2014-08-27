@@ -192,10 +192,15 @@ FactoryGirl.define do
   end
 
   factory :carry_order, class: AxiomusApi::CarryOrder, parent: :base_order do
+    ignore do
+      b_date_raw {Time.now + rand(5..10)*24*60*60}
+    end
+
     sms {rand(1..2) ? generate(:sms) : nil}
     office {[0, 1, nil][rand(0..2)]}
-    b_date {Time.now + rand(5..10)*24*60*60}
-    e_date {b_date + 7*24*60*60}
+
+    b_date {b_date_raw.strftime('%Y-%m-%d')}
+    e_date {(b_date_raw + 7*24*60*60).strftime('%Y-%m-%d')}
     delivset nil
 
     trait :with_delivset do

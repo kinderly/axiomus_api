@@ -47,7 +47,6 @@ describe AxiomusApi::Session do
 
     it 'should create new return order and update it' do
       order = build(:return_order)
-      puts order.to_xml
       z = @session.new(order)
       expect(z.code).to eq 0
       okey = z.okey
