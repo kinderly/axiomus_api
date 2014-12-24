@@ -55,7 +55,7 @@ module AxiomusApi::Serializable
   end
 
   def normalize_axiomus_xml(str)
-    str.gsub(/&[^;]+;/, '')
+    str.gsub(/&[^;]+;/, '').gsub('×','x')
   end
 
 end
