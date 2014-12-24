@@ -192,7 +192,7 @@ FactoryGirl.define do
   end
 
   factory :carry_order, class: AxiomusApi::CarryOrder, parent: :base_order do
-    ignore do
+    transient do
       b_date_raw {Time.now + rand(5..10)*24*60*60}
     end
 

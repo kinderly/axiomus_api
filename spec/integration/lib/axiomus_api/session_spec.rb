@@ -1,6 +1,6 @@
 require_relative '../../../spec_helper'
 
-describe AxiomusApi::Session do
+describe AxiomusApi::Session, type: :integration do
   before(:all) do
     AxiomusApi.logger.level = Logger::INFO
     @session = AxiomusApi.test_session
