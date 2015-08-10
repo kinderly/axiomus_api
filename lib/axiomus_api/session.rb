@@ -22,7 +22,7 @@ class AxiomusApi::Session
   end
 
   ['', '_carry', '_export', '_self_export', '_post', '_dpd',
-   '_ems', '_region_courier', '_region_pickup'].each do |suffix|
+  '_ems', '_region_courier', '_region_pickup'].each do |suffix|
     [:new, :update].each do |prefix|
       m_name = "#{prefix}#{suffix}".to_sym
       define_method("#{prefix}#{suffix}") do |order|
@@ -31,11 +31,18 @@ class AxiomusApi::Session
     end
   end
 
-  def get_regions()
+  def get_regions
     xml_request = create_request(:get_regions)
     xml_request.auth.ukey = @ukey
     response = send_request(xml_request)
     AxiomusApi::RegionsResponse.new (response.body)
+  end
+
+  def get_carries
+    xml_request = create_request(:get_carry)
+    xml_request.auth.ukey = @ukey
+    response = send_request(xml_request)
+    AxiomusApi::CarryResponse.new(response.body)
   end
 
   def status(okey)
