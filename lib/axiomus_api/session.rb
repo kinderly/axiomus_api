@@ -108,10 +108,10 @@ class AxiomusApi::Session
     connection = Net::HTTP.new(AxiomusApi::AXIOMUS_HOST, AxiomusApi::AXIOMUS_PORT)
     http_request = get_http_request(xml_request)
     logger.info("Request to #{xml_request.mode}")
-    logger.debug("Request body: #{xml_request.to_xml(true)}")
+    logger.info("Request body: #{xml_request.to_xml(true)}")
     response = connection.request(http_request)
     logger.info("Response: #{response.code}")
-    logger.debug("Response raw: #{response.body}")
+    logger.info("Response raw: #{response.body}")
     response.body.gsub!(/^.*<\?xml/, '<?xml')
     response
   end
