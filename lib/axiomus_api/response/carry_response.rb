@@ -27,7 +27,6 @@ class AxiomusApi::CarryResponse
       @work_schedule  = node.xpath('@WorkSchedule').text
       @area           = node.xpath('@Area').text
       @address        = Address.new(node.xpath('address'))
-      @services       = node.xpath('services').map(&:attributes).first
     end
   end
 
