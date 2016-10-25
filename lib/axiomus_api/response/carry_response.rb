@@ -15,6 +15,7 @@ class AxiomusApi::CarryResponse
     attr_accessor :work_schedule
     attr_accessor :area
     attr_accessor :address
+    attr_accessor :services
 
     def initialize(node)
       @office_code    = node.xpath('@office_code').text.to_i
